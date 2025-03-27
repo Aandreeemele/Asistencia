@@ -97,7 +97,6 @@ function showPanel() {
             });
         }
 
-        // Agregar event listeners después de que la interfaz se ha cargado
         document.getElementById("alumnos").addEventListener("click", showAlumnos);
         document.getElementById("grados").addEventListener("click", showGrados);
         document.getElementById("maestros").addEventListener("click", showMaestros);

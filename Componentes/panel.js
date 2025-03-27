@@ -1,5 +1,5 @@
 if (!localStorage.getItem('user')) {
-    window.location.href = '/'; // Redirigir si no está autenticado
+    window.location.href = '/'; 
   }
   
   document.getElementById('alumnos').addEventListener('click', () => {
