@@ -3,7 +3,6 @@ import { showLogin } from "./login.js";
 import { showPrePrimaria } from "./preprimaria.js";
 import { showPrimaria } from "./primaria.js";
 import { showBasicos } from "./basicos.js";
-import { showDiver } from "./diversificado.js";
 import { datosGrados, generarVistaGrado } from "./proyecciones.js"; // <- Corrección
 
 async function showPanel() {
