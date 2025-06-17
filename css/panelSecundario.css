@@ -1,14 +1,31 @@
+.panexl-containxr{
+    max-width: 100lh;
+    display: grid;
+    grid-template-columns: repeat(8, 51px );
+    grid-template-rows: repeat(17, 50px);
+}
 .imgx1{
     max-width: 100vh;
+}
+.Titulx001{
+    font-size: 2rem;
+    grid-column: 3;
+    grid-row: 2;
+    position: relative;
+    left: 1rem;
+}
+.Titulx002{
+    grid-column: 4;
+    position: relative;
+    top: 6.5rem;
 }
 #Volver999{
     border: 1px solid rgba(0, 0, 0, 0);
     background-color: rgba(255, 255, 255, 0);
     color: black;
     font-size: 4rem;
-    position: relative;
-    top: -43rem;
-    left: -25rem;
+    grid-column: 1/2;
+    grid-row: 2/3;
 
 }
 #Siguiente999{
@@ -16,7 +33,129 @@
     border: 0.5px solid rgba(0, 0, 0, 0);
     background-color: rgba(255, 255, 255, 0.007);
     color: black;
-    position: relative;
-    top: -43rem;
-    left: -10rem;
+    grid-column: 7/8;
+    grid-row: 2/3;
 }
+.ivcompu {
+    width: 350px;
+    height: 2.5rem;
+    grid-row: 5;
+    position: relative;
+    left: 1.5rem;
+    background-color: rgba(118, 202, 228, 0.774);
+    border-radius: 25px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  .ivdiseño {
+    width: 350px;
+    height: 2.5rem;
+    border-radius: 25px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    grid-row: 6;
+    position: relative;
+    left: 1.5rem;
+    background-color: rgba(238, 142, 63, 0.801);
+  }
+  .ivbiolo{
+    width: 350px;
+    height: 2.5rem;
+    border-radius: 25px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    grid-row: 7;
+    position: relative;
+    left: 1.5rem;
+    background-color: rgba(0, 128, 0, 0.438);
+  }
+  .ivperito {
+    width: 350px;
+    height: 2.5rem;
+    border-radius: 25px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    grid-row: 8;
+    position: relative;
+    left: 1.5rem;
+    background-color: rgba(137, 43, 226, 0.37);
+  }
+
+  .vcompu {
+    width: 350px;
+    height: 2.5rem;
+    border-radius: 25px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    grid-row: 9;
+    position: relative;
+    left: 1.5rem;
+    background-color: rgba(72, 142, 163, 0.774);
+  }
+  .vdiseño {
+    width: 350px;
+    height: 2.5rem;
+    border-radius: 25px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    grid-row: 10;
+    position: relative;
+    left: 1.5rem;
+    background-color: rgba(245, 65, 221, 0.37);
+  }
+  .vbiolo{
+    width: 350px;
+    height: 2.5rem;
+    border-radius: 25px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    grid-row: 11;
+    position: relative;
+    left: 1.5rem;
+    background-color: rgba(228, 13, 13, 0.37);
+  }
+  .vperito {
+    width: 350px;
+    height: 2.5rem;
+    border-radius: 25px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    grid-row: 12;
+    position: relative;
+    left: 1.5rem;
+    background-color: rgba(82, 245, 17, 0.37);
+  }
+.viperito {
+    width: 350px;
+    height: 2.5rem;
+    border-radius: 25px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    grid-row: 13;
+    position: relative;
+    left: 1.5rem;
+    background-color: rgba(105, 231, 193, 0.37);
+}
+
+  #Proyecciones01{
+    width: 200px;
+    height: 2.5rem;
+    border-radius: 25px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    grid-row: 15;
+    position: relative;
+    left: 0.5rem;
+    color: white;
+    background-color: rgb(15, 19, 75);
+  }

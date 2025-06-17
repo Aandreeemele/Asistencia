@@ -1,11 +1,9 @@
 body {
-  margin: 0;
-  padding: 0;
   font-family: Arial, sans-serif;
-  background-color: #f4f4f4e7;
   height: 100vh;
-  max-width: 100lh;
+  max-width: 100vh;         
 }
+
 .login{
   height: 100vh;
   max-width: 100lh;

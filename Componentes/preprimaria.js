@@ -52,7 +52,7 @@ function showPrePrimaria() {
             <div class="form-nuevo-docente">
                 <input type="text" id="nombreDocente" placeholder="Nombre del docente">
                 <input type="text" id="gradoDocente" placeholder="Grado o área asignada">
-                <button id="agregarNuevoDocente">Agregar Docente</button>
+                <button id="agregarNuevoDocentx">Agregar Docente</button>
             </div>
 
             <div id="listaDocentes"></div>
@@ -60,7 +60,7 @@ function showPrePrimaria() {
     `;
 
     document.getElementById("Volver99").addEventListener("click", showPanel);
-    const btnAgregar = document.getElementById("agregarNuevoDocente");
+    const btnAgregar = document.getElementById("agregarNuevoDocentx");
 
     btnAgregar.addEventListener("click", () => {
         const nombre = document.getElementById("nombreDocente").value.trim();

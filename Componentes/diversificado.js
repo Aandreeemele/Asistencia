@@ -1,4 +1,6 @@
-import { showPanel } from "./loginPrimero.js";
+import { showVentanaSecundaria } from "./loginSecundario.js";
+import { showVentanaCuatro } from "./loginCuatro.js";
+
 
 function crearTarjetasDocentesDiver(docentes = []) {
     return docentes.map((docente, index) => `
@@ -47,20 +49,21 @@ function showDiver() {
             <img src="fondo 3.svg" alt="" class="imgfondo">
             <button id="Volver99">←</button>
             <button id="Siguiente99">→</button>
-            <p class="Titulopre">𝙼𝙰𝙴𝚂𝚃𝚁𝙾𝚂</p>
-            <p class="Titulopre1">𝙳𝙴 𝙳𝙸𝚅𝙴𝚁𝚂𝙸𝙵𝙸𝙲𝙰𝙳𝙾</p>
+            <p class="Titulopre">𝙼𝚊𝚛𝚌𝚊</p>
+            <p class="Titulopre1"> 𝙳𝚘𝚌𝚎𝚗𝚝𝚎</p>
             <div class="form-nuevo-docente">
                 <input type="text" id="nombreDocente" placeholder="Nombre del docente">
                 <input type="text" id="gradoDocente" placeholder="Carrera o área asignada">
-                <button id="agregarNuevoDocente">Agregar Docente</button>
+                <button id="agregarNuevoDocentx">Agregar Docente</button>
             </div>
 
             <div id="listaDocentes"></div>
         </div>
     `;
 
-    document.getElementById("Volver99").addEventListener("click", showPanel);
-    const btnAgregar = document.getElementById("agregarNuevoDocente");
+    document.getElementById("Volver99").addEventListener("click", showVentanaSecundaria);
+    document.getElementById("Siguiente99").addEventListener("click", showVentanaCuatro);
+    const btnAgregar = document.getElementById("agregarNuevoDocentx");
 
     btnAgregar.addEventListener("click", () => {
         const nombre = document.getElementById("nombreDocente").value.trim();

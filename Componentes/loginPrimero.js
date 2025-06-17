@@ -34,7 +34,7 @@ async function showPanel() {
         document.getElementById("PrePrimaria").addEventListener("click", showPrePrimaria);
         document.getElementById("PrimariaMayor").addEventListener("click", showPrimaria);
         document.getElementById("Basicos").addEventListener("click", showBasicos);
-        document.getElementById("Bachilleratos").addEventListener("click", showDiver);
+        document.getElementById("Bachilleratos").addEventListener("click", showVentanaSecundaria);
         document.getElementById("Proyecciones").addEventListener("click", () => {
             const root = document.getElementById("root");
             root.innerHTML = ""; // limpia el contenido anterior

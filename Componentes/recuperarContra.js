@@ -86,6 +86,8 @@ function showRecuperarContra() {
             alert("Error de red al guardar contraseña.");
         }
     });
+
+    document.getElementById("guardarContra").addEventListener("click", showPanel);
 }
 
 export { showRecuperarContra };

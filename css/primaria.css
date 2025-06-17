@@ -68,6 +68,7 @@
     color: white;
     position: relative;
     left: 2.5rem;
+    top: 3rem;
     margin-bottom: 5px;
 }
 #agregarDocentePrimaria{
@@ -78,6 +79,7 @@
     color: white;
     position: relative;
     left: 8rem;
+    top: 3rem;
 }
 .Titulopre{
     grid-column: 3;

@@ -1,104 +1,122 @@
 import { showVentanaSecundaria } from "./loginSecundario.js";
 import { showVentanaCuatro } from "./loginCuatro.js";
+
 function showVentanaTres() {
     const root = document.getElementById("root");
-    root.innerHTML = `
-        <div class="panel-container">
-            <img src="fondo 3.svg" alt="" class="imgpanel">
-            <img src="fondo 3.svg" alt="" class="imgpanel1">
-            <button id="Volver">←</button>
-            <button id="Siguiente1">→</button>
-            <p class="Titulo0001"> 𝙼𝙰𝚁𝙲𝙰𝚁</p>
-            <p class="Titulo0002"> 𝙿𝙴𝚁𝚂𝙾𝙽𝙰𝙻 𝙳𝙾𝙲𝙴𝙽𝚃𝙴</p>
-            <button id="agregarDiv">Agregar Docente</button>
-            <div id="contenedorDivs"></div>
-            <div id="confirmacionEliminar" class="modal" style="display:none;">
-                <div class="modal-content">
-                    <p>¿Estás seguro de eliminar el docente? Se perderán las informaciones.</p>
-                    <button id="cancelarEliminar">Cancelar</button>
-                    <button id="confirmarEliminar">Eliminar</button>
-                </div>
-            </div>
-        </div>
-    `;
+    root.innerHTML = getTemplateHTML();
 
-    document.getElementById("Volver").addEventListener("click", showVentanaSecundaria);
-    document.getElementById("Siguiente1").addEventListener("click", showVentanaCuatro);
+    const btnVolver = document.getElementById("btnVolver");
+    const btnSiguiente = document.getElementById("btnSiguiente");
+    const btnAgregarDocente = document.getElementById("btnAgregarDocente");
 
-    const contenedor = document.getElementById("contenedorDivs");
-    const modal = document.getElementById("confirmacionEliminar");
-    const cancelarBtn = document.getElementById("cancelarEliminar");
-    const confirmarBtn = document.getElementById("confirmarEliminar");
+    const contenedor = document.getElementById("contenedorDocentes");
+    const modal = document.getElementById("modalEliminar");
+    const btnCancelar = document.getElementById("btnCancelarEliminar");
+    const btnConfirmar = document.getElementById("btnConfirmarEliminar");
 
-    let docentes = JSON.parse(localStorage.getItem("docentes")) || [];
+    let docentes = cargarDocentes();
     let indexAEliminar = null;
 
-    docentes.forEach((docente, index) => {
-        agregarDiv(docente, index);
-    });
+    docentes.forEach((nombre, index) => crearElementoDocente(nombre, index, contenedor, docentes, modal, setIndexEliminar));
 
-    document.getElementById("agregarDiv").addEventListener("click", () => {
+    btnVolver.addEventListener("click", showVentanaSecundaria);
+    btnSiguiente.addEventListener("click", showVentanaCuatro);
+
+    btnAgregarDocente.addEventListener("click", () => {
         const nuevoNombre = `Docente ${docentes.length + 1}`;
         docentes.push(nuevoNombre);
-        localStorage.setItem("docentes", JSON.stringify(docentes));
-        agregarDiv(nuevoNombre, docentes.length - 1);
+        guardarDocentes(docentes);
+        crearElementoDocente(nuevoNombre, docentes.length - 1, contenedor, docentes, modal, setIndexEliminar);
     });
 
-    function agregarDiv(nombre, index) {
-        const div = document.createElement("div");
-        div.className = "divsx";
-        div.innerHTML = `
-            <div class="docente-info">
-                <span>${nombre}</span>
-                <div class="botones-acciones">
-                    <button class="info" data-index="${index}">📲</button>
-                    <button class="eliminar" data-index="${index}">Elimnar</button>
-                    <button id="Asistencia">✓</button>
-            <button id="NoAsistencia">x</button>
-                </div>
-            </div>
-            <div class="detalle-info" id="info-${index}" style="display: none;">
-                <p><strong>Nombre:</strong> ${nombre}</p>
-                <p><strong>Área:</strong> Matemáticas</p>
-                <p><strong>Email:</strong> docente${index + 1}@ejemplo.com</p>
-                <p><strong>Teléfono:</strong> 1456-0789${index}</p>
-            </div>
-        `;
-        contenedor.appendChild(div);
-
-        const btnEliminar = div.querySelector(".eliminar");
-        const btnInfo = div.querySelector(".info");
-        const infoDiv = div.querySelector(`#info-${index}`);
-
-        btnEliminar.addEventListener("click", (e) => {
-            indexAEliminar = parseInt(e.target.getAttribute("data-index"));
-            modal.style.display = "block";
-        });
-
-        btnInfo.addEventListener("click", () => {
-            if (infoDiv.style.display === "none") {
-                infoDiv.style.display = "block";
-                btnInfo.textContent = "Ocultar";
-            } else {
-                infoDiv.style.display = "none";
-                btnInfo.textContent = "📲";
-            }
-        });
-    }
-
-    cancelarBtn.addEventListener("click", () => {
+    btnCancelar.addEventListener("click", () => {
         modal.style.display = "none";
         indexAEliminar = null;
     });
 
-    confirmarBtn.addEventListener("click", () => {
+    btnConfirmar.addEventListener("click", () => {
         if (indexAEliminar !== null) {
             docentes.splice(indexAEliminar, 1);
-            localStorage.setItem("docentes", JSON.stringify(docentes));
-            showVentanaTres();
+            guardarDocentes(docentes);
+            showVentanaTres(); // <--- CORREGIDO: recarga la vista correctamente
+        }
+    });
+
+    function setIndexEliminar(index) {
+        indexAEliminar = index;
+    }
+}
+
+function getTemplateHTML() {
+    return `
+        <div class="panxxlcontainer">
+            <img src="fondo 3.svg" alt="" class="imgpanel">
+            <button id="btnVolver">←</button>
+            <button id="btnSiguiente">→</button>
+            <p class="titPrincipal">𝙼𝙰𝚁𝙲𝙰𝚁</p>
+            <p class="subtitulo">𝙿𝙴𝚁𝚂𝙾𝙽𝙰𝙻 𝙳𝙾𝙲𝙴𝙽𝚃𝙴</p>
+            <button id="btnAgregarDocente">Agregar Docente</button>
+            <div id="contenedorDocentes"></div>
+            <div id="modalEliminar" class="modal" style="display:none;">
+                <div class="modal-content">
+                    <p>¿Estás seguro de eliminar el docente? Se perderán las informaciones.</p>
+                    <button id="btnCancelarEliminar">Cancelar</button>
+                    <button id="btnConfirmarEliminar">Eliminar</button>
+                </div>
+            </div>
+        </div>
+    `;
+}
+
+function crearElementoDocente(nombre, index, contenedor, docentes, modal, setIndexEliminar) {
+    const div = document.createElement("div");
+    div.className = "docente-card";
+    div.innerHTML = `
+        <div class="docente-info">
+            <span>${nombre}</span>
+            <div class="acciones-docente">
+                <button class="btn-info" data-index="${index}">📲</button>
+                <button class="btn-eliminar" data-index="${index}">Eliminar</button>
+                <button class="btn-asistio">✓</button>
+                <button class="btn-no-asistio">x</button>
+            </div>
+        </div>
+        <div class="detalle-docente" id="info-${index}" style="display: none;">
+            <p><strong>Nombre:</strong> ${nombre}</p>
+            <p><strong>Área:</strong> Matemáticas</p>
+            <p><strong>Email:</strong> docente${index + 1}@ejemplo.com</p>
+            <p><strong>Teléfono:</strong> 1456-0789${index}</p>
+        </div>
+    `;
+    contenedor.appendChild(div);
+
+    const btnEliminar = div.querySelector(".btn-eliminar");
+    const btnInfo = div.querySelector(".btn-info");
+    const detalle = div.querySelector(`#info-${index}`);
+
+    btnEliminar.addEventListener("click", (e) => {
+        const idx = parseInt(e.target.getAttribute("data-index"));
+        setIndexEliminar(idx);
+        modal.style.display = "block";
+    });
+
+    btnInfo.addEventListener("click", () => {
+        if (detalle.style.display === "none") {
+            detalle.style.display = "block";
+            btnInfo.textContent = "Ocultar";
+        } else {
+            detalle.style.display = "none";
+            btnInfo.textContent = "📲";
         }
     });
 }
-showVentanaSecundaria();
-showVentanaCuatro();
-export {  showVentanaTres };
+
+function cargarDocentes() {
+    return JSON.parse(localStorage.getItem("docentes")) || [];
+}
+
+function guardarDocentes(docentes) {
+    localStorage.setItem("docentes", JSON.stringify(docentes));
+}
+
+export { showVentanaTres };
