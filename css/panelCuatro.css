@@ -1,0 +1,198 @@
+.panel-container4{
+    width: 375px;
+    height: 875px;
+    margin: auto;
+}
+#Volvxr{
+    border: 1px solid rgba(0, 0, 0, 0);
+    background-color: rgba(255, 255, 255, 0);
+    color: black;
+    font-size: 4rem;
+    position: relative;
+    left: -4rem;
+    top: 3.5rem;
+}
+#Siguientx1{
+    font-size: 4rem;
+    border: 0.5px solid rgba(0, 0, 0, 0);
+    background-color: rgba(255, 255, 255, 0.007);
+    color: black;
+    position: relative;
+    left: 4rem;
+    top: 3.5rem;
+}
+.TitulodelDocente{
+    position: relative;
+    top: 5rem;
+    left: 8rem;
+}
+.Enero{
+    position: relative;
+    top: 7rem;
+    left: 10rem;
+}
+#SCalendario{
+    width: 5px;
+    border: 1px solid rgba(0, 0, 0, 0);
+    background-color: rgba(255, 255, 255, 0);
+    color: black;
+    font-size: 2rem;
+    position: relative;
+    top: -0em;
+    left: 2.5rem;
+}
+.Semana1{
+    position: relative;
+    left: -6rem;
+    display: grid;
+    grid-template-columns: repeat(1, 100px 30px 30px 30px 30px 30px);
+    
+}
+.S1, .S2, .S3, .S4, .S5{
+    width: 20px;
+    height: 20px;
+    border: 1px solid green;
+    border-radius: 50px;
+    background-color: green;
+   
+}
+.Semana2{
+    position: relative;
+    left: rem;
+    display: grid;
+    grid-template-columns: repeat(1, 100px 30px 30px 30px 30px 30px);
+    
+}
+.S01, .S02, .S03, .S04, .S05{
+    width: 20px;
+    height: 20px;
+    border: 1px solid green;
+    border-radius: 50px;
+    background-color: green;
+    
+   
+}
+.Semana3{
+    position: relative;
+    left: rem;
+    display: grid;
+    grid-template-columns: repeat(1, 100px 30px 30px 30px 30px 30px);
+    
+}
+.S001, .S002, .S003, .S004, .S005{
+    width: 20px;
+    height: 20px;
+    border: 1px solid green;
+    border-radius: 50px;
+    background-color: green;
+    
+   
+}
+.Semana4{
+    position: relative;
+    left: rem;
+    display: grid;
+    grid-template-columns: repeat(1, 100px 30px 30px 30px 30px 30px);
+    
+}
+.S0001, .S0002, .S0003, .S0004, .S0005{
+    width: 20px;
+    height: 20px;
+    border: 1px solid green;
+    border-radius: 50px;
+    background-color: green;
+    
+   
+}
+
+.Febrero{
+    position: relative;
+    top: 5rem;
+    left: 5.5rem;
+}
+
+.Semana01{
+    position: relative;
+    left: -5.5rem;
+    top: -9rem;
+    display: grid;
+    grid-template-columns: repeat(1, 100px 30px 30px 30px 30px 30px);
+    
+}
+.S1, .S2, .S3, .S4, .S5{
+    width: 20px;
+    height: 20px;
+    border: 1px solid green;
+    border-radius: 50px;
+    background-color: green;
+   
+}
+.Semana02{
+    position: relative;
+    left: rem;
+    display: grid;
+    grid-template-columns: repeat(1, 100px 30px 30px 30px 30px 30px);
+    
+}
+.S01, .S02, .S03, .S04, .S05{
+    width: 20px;
+    height: 20px;
+    border: 1px solid green;
+    border-radius: 50px;
+    background-color: green;
+    
+   
+}
+.Semana03{
+    position: relative;
+    left: rem;
+    display: grid;
+    grid-template-columns: repeat(1, 100px 30px 30px 30px 30px 30px);
+    
+}
+.S001, .S002, .S003, .S004, .S005{
+    width: 20px;
+    height: 20px;
+    border: 1px solid green;
+    border-radius: 50px;
+    background-color: green;
+    
+   
+}
+.Semana04{
+    position: relative;
+    left: rem;
+    display: grid;
+    grid-template-columns: repeat(1, 100px 30px 30px 30px 30px 30px);
+    
+}
+.S0001, .S0002, .S0003, .S0004, .S0005{
+    width: 20px;
+    height: 20px;
+    border: 1px solid green;
+    border-radius: 50px;
+    background-color: green;
+    
+   
+}
+
+#SCalendario1{
+    width: 5px;
+    border: 1px solid rgba(0, 0, 0, 0);
+    background-color: rgba(255, 255, 255, 0);
+    color: black;
+    font-size: 2rem;
+    position: relative;
+    top: -1.7em;
+    left: 7rem;
+}
+#SCalendario01{
+    width: 5px;
+    border: 1px solid rgba(0, 0, 0, 0);
+    background-color: rgba(255, 255, 255, 0);
+    color: black;
+    font-size: 2rem;
+    position: relative;
+    top: -4.2em;
+    left: -7rem;
+}

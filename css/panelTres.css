@@ -1,0 +1,186 @@
+#Volver{
+    border: 1px solid rgba(0, 0, 0, 0);
+    background-color: rgba(255, 255, 255, 0);
+    color: black;
+    font-size: 4rem;
+    position: relative;
+    top: -102rem;
+    left: -3rem;
+}
+#Siguiente1{
+    font-size: 4rem;
+    border: 0.5px solid rgba(0, 0, 0, 0);
+    background-color: rgba(255, 255, 255, 0.007);
+    color: black;
+    position: relative;
+    top: -102rem;
+    left: 5rem;
+}
+.Titulo0001{
+    font-size: 2rem;
+    position: relative;
+    top: -100rem;
+    left: 8.5rem;
+}
+.Titulo0002{
+    font-size: 1.5rem;
+    position: relative;
+    top: -102rem;
+    left: 5rem;
+}
+.modal {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 375px;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+   
+    z-index: 999;
+    margin: auto;
+}
+
+.modal-content {
+    background-color: white;
+    padding: 20px;
+    border-radius: 10px;
+    text-align: center;
+}
+
+#agregarDiv{
+    position: relative;
+    width: 225px;
+    top: -25rem;
+    left: 5rem;
+    font-size: 1rem;
+    background-color: rgba(13, 50, 61, 0.774);
+}
+
+
+.divsx {
+    width: 300px;
+    background-color: rgba(13, 50, 61, 0.774);
+    border: 1px solid #ccc;
+    padding: 25px 15px;
+    border-radius: 15px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    font-weight: bold;
+    font-size: 1rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    position: relative;
+    left: 2rem;
+    top: -105rem;
+}
+#contenedorDivs{
+    height: 0px;
+    width: 0px;
+}
+
+.divsx {
+
+    border: 1px solid #ccc;
+    padding: 10px;
+    margin: 10px;
+    border-radius: 10px;
+    background-color: rgba(32, 113, 138, 0.774);
+}
+
+.docente-info {
+    position: relative;
+    top: 1.5rem;
+    left: 0.5rem;
+    font-size: 1rem;
+    
+}
+
+.botones-acciones {
+    display: flex;
+    gap: 0.5rem;
+}
+
+button.info {
+    background-color: #020829d3;
+    color: white;
+    border: none;
+    border-radius: 50px;
+    height: 40px;
+    padding: 5px 10px;
+    cursor: pointer;
+    font-size: 0.8rem;
+    width: 50px;
+    height: 50px;
+    position: relative;
+    left: 13rem;
+    top: -3.3rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+button.info:hover {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: #020e27b6;
+}
+
+.detalle-info {
+    margin-top: 10px;
+    background-color: #eef4ff;
+    border-left: 4px solid #1976d2;
+    padding: 10px;
+    border-radius: 6px;
+    font-size: 0.9rem;
+    position: relative;
+    left: -25rem;
+    top: -5rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+
+#Asistencia{
+    width: 5px;
+    height: 5px;
+    border-radius: 50px;
+    border: 1px solid rgba(0, 0, 0, 0);
+    background-color: rgba(50, 112, 14, 0.658);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    top: -2.2rem;
+    left: -9rem;
+    font-size: 1.3rem;
+
+}
+#NoAsistencia{
+    width: 5px;
+    height: 5px;
+    border-radius: 50px;
+    border: 1px solid rgba(0, 0, 0, 0);
+    background-color: rgba(211, 8, 8, 0.822);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    top: -2.2rem;
+    left: -10.3rem;
+    color: white;
+    font-size: 1.3rem;
+}
+.eliminar{
+    width: 150px;
+    height: 30px;
+    background-color: #0d112498;
+    display: flex;
+     align-items: center;
+     justify-content: center;
+     position: relative;
+     left: 1.8rem;
+     top: -0rem;
+     border: 1px solid rgba(0, 0, 0, 0);
+}

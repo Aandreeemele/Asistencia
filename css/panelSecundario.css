@@ -1,0 +1,22 @@
+.imgx1{
+    max-width: 100vh;
+}
+#Volver999{
+    border: 1px solid rgba(0, 0, 0, 0);
+    background-color: rgba(255, 255, 255, 0);
+    color: black;
+    font-size: 4rem;
+    position: relative;
+    top: -43rem;
+    left: -25rem;
+
+}
+#Siguiente999{
+    font-size: 4rem;
+    border: 0.5px solid rgba(0, 0, 0, 0);
+    background-color: rgba(255, 255, 255, 0.007);
+    color: black;
+    position: relative;
+    top: -43rem;
+    left: -10rem;
+}

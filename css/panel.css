@@ -1,0 +1,113 @@
+.Titulo01{
+    font-size: 3rem;
+    position: relative;
+    top: -46rem;
+    left: 6rem;
+}
+.Titulo02{
+    font-size: 2rem;
+    position: relative;
+    top: -50rem;
+    left: 6.4rem;
+}
+
+.sub{
+   position: relative;
+   top: -50rem;
+}  
+.grados-list{
+    width: 0rem;
+    height: 0px;
+}
+#PrePrimaria{
+    width: 350px;
+    height: 50px;
+    border: 1px solid rgba(0, 0, 0, 0);
+    font-size: 1rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+    top: -50rem;
+    left: 1.3rem;
+    border-radius: 25px;
+    background-color: rgba(118, 202, 228, 0.774);
+}
+#PrimariaMayor{
+    width: 350px;
+    height: 50px;
+    font-size: 1rem;
+    border: 1px solid rgba(0, 0, 0, 0);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+    top: -49rem;
+    left: 1.3rem;
+    border-radius: 25px;
+    background-color: rgba(238, 142, 63, 0.801);
+}
+#Basicos{
+    width: 350px;
+    height: 50px;
+    font-size: 1rem;
+    border: 1px solid rgba(0, 0, 0, 0);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+    top: -48rem;
+    left: 1.3rem;
+    border-radius: 25px;
+    background-color: rgba(0, 128, 0, 0.438);
+}
+#Bachilleratos{
+    width: 350px;
+    height: 50px;
+    font-size: 1rem;
+    border: 1px solid rgba(0, 0, 0, 0);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+    top: -47rem;
+    left: 1.3rem;
+    border-radius: 25px;
+    background-color: rgba(137, 43, 226, 0.37);
+}
+#Proyecciones{
+    width: 220px;
+    height: 50px;
+    font-size: 1rem;
+    border-radius: 25px;
+    border: 1px solid rgba(0, 0, 0, 0);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
+    position: relative;
+    top: -38rem;
+    left: 1rem;
+    background-color: rgba(11, 11, 78, 0.76);
+}
+#cerrar{
+    position: relative;
+    top: -38rem;
+    border: 1px solid rgba(0, 0, 0, 0.041);
+    background-color: rgba(255, 255, 255, 0.027);
+    color: black;
+    font-size: 1.2rem;
+}
+#Siguiente{
+    font-size: 4rem;
+    border: 0.5px solid rgba(0, 0, 0, 0);
+    background-color: rgba(255, 255, 255, 0.007);
+    color: black;
+    position: relative;
+    top: -80.5rem;
+    left: 11rem;
+}
+.imgpanel{
+    height: 100vh;
+    overflow: hidden;
+}

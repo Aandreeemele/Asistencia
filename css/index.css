@@ -1,457 +1,98 @@
 body {
-    font-family: Arial, sans-serif;
-    background-color: #f4f4f4e7;
-    padding: 20px;
-    width: 480px;
- 
-    margin: auto;
-  }
-  
-  h2 {
-    color: #333;
-  }
-  
-  button {
-    padding: 10px 20px;
-    margin: 10px;
-    cursor: pointer;
-  }
-  
-  button:hover {
-    background-color: #ddd;
-  }
-  
-  #menu {
-    display: flex;
-    flex-direction: column;
-  }
-  
-  form {
-    display: flex;
-    flex-direction: column;
-    width: 200px;
-    margin: 0 auto;
-  }
-  
-  input {
-    padding: 10px;
-    margin-bottom: 10px;
-  }
-  
-  ul {
-    list-style-type: none;
-  }
-  
-  li {
-    margin: 10px 0;
-  }
-  
-#alumnos{
-    background-color: rgb(9, 9, 80);
-    color: white;
-    border-radius: 15px;
-    width: 8rem;
-    height: 2rem;
-    display: flex;
-    align-items: center;
-    justify-content: center;
+  margin: 0;
+  padding: 0;
+  font-family: Arial, sans-serif;
+  background-color: #f4f4f4e7;
+  height: 100vh;
+  max-width: 100lh;
 }
-#grados{
-    background-color: rgb(9, 9, 80);
-    color: white;
-    border-radius: 15px;
-    width: 8rem;
-    height: 2rem;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    position: relative;
-    top: -3.3rem;
-    left: 9rem;
-}
-#maestros{
-    background-color: rgb(9, 9, 80);
-    color: white;
-    border-radius: 15px;
-    width: 10rem;
-    height: 2rem;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    position: relative;
-    top: -4.2rem;
-}
-#cerrar{
-    background-color: rgb(9, 9, 80);
-    color: white;
-    border-radius: 15px;
-    width: 15rem;
-    height: 2rem;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    position: relative;
-    top: -5rem;
-}
-#fecha{
-  background-color: rgb(9, 9, 80);
-  color: white;
-  border-radius: 15px;
-  width: 8rem;
-  height: 2rem;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  position: relative;
-  top: -16.3rem;
-  left: 18rem;
-}
-#uniforme{
-  background-color: rgb(9, 9, 80);
-  color: white;
-  border-radius: 15px;
-  width: 12rem;
-  height: 2rem;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  position: relative;
-  top: -10.7rem;
-  left: 11rem;
-}
-.Alum{
-    background-color: rgb(9, 9, 80);
-    color: white;
-    border-radius: 15px;
-    position: relative;
-    left: -1rem;
-}
-.Alum0{
-    position: relative;
-    top: 0.2rem;
-    left: 2rem;
-}
-.Alum1 {
-   color: aqua;
-   position: relative;
-   left: 9rem;
-}
-.h3{
-    color: red;
-}
-
-.sub{
-    border: 1px solid black;
-    height: 1.7rem;
-    width: 10rem;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    position: relative;
-    left: 6.5rem;
-    background-color: rgb(9, 9, 80) ;
-    border-radius: 5px;
-    color: white;
-}
-.maes{
-    background-color: aqua;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-}
-.maes0{
-    border: 1px solid black;
-    width: 22rem;
-    height: 4rem;
-    border-radius: 10px
-}
-.maes1{
-position: relative;
-top: -1rem;
-left: 6rem;
-}
-.maes2{
-position: relative;
-left: 8rem;
-top: -1rem;
+.login{
+  height: 100vh;
+  max-width: 100lh;
+  display: grid;
+  grid-template-columns: repeat(8, 51px );
+  grid-template-rows: repeat(17, 50px);
 }
 .dise{
-  width: 26rem;
-  height: 5rem;
-  border-radius: 10px;
-  border: 1px solid black;
-  background-color: rgb(9, 9, 80) ;
+  border: 1px solid green;
+  grid-column:  4/6;
+  grid-row: 2/4;
+  border-radius: 50rem;
+  background-color: green;
+  font-size: 3rem;
   color: white;
-  font-size: 1rem;
   display: flex;
-  justify-content: center;
   align-items: center;
+  justify-content: center;
 }
-.a1{
+.z10{
+  grid-row: 4/5;
+  grid-column: 3/6;
   position: relative;
-  top: 1rem;
-  left: -10.5rem;
-  font-size: 0.9rem;
+  left: 1.2rem;
+  top: -1rem;
+  font-size: 1.8rem;
 }
-.a2{
-  width: 26rem;
-  height: 3.5rem;
-  border: 1px solid black;
-  background-color: rgb(9, 9, 80);
+.z11{
+  grid-row: 5/6;
+  grid-column: 4/8;
   position: relative;
-  top: 1rem;
-  color: white;
-  border-radius: 15px;
-  position: relative;
-  top: -15rem;  
+  left: -1.5rem;
+  font-size: 1.2rem;
+  top: -1.4rem;
 }
-.a3{
-  width: 26rem;
-  height: 3.5rem;
-  border: 1px solid black;
-  background-color: rgb(9, 9, 80);
-  position: relative;
-  top: 1.5rem;
-  border-radius: 15px;
-  color: white;
-  position: relative;
-  top: -14.5rem;  
-}
-.a4{
-  width: 26rem;
-  height: 3.5rem;
-  border: 1px solid black;
-  background-color: rgb(9, 9, 80);
-  position: relative;
-  top: 2rem;
-  border-radius: 15px;
-  color: white;
-  position: relative;
-  top: -14rem;  
-}
-.a5{
-  width: 26rem;
-  height: 3.5rem;
-  border: 1px solid black;
-  background-color: rgb(9, 9, 80);
-  position: relative;
-  top: 2.5rem;
-  border-radius: 15px;
-  color: white;
-  position: relative;
-  top: -13.5rem;  
-
-}
-.a6{
-  width: 26rem;
-  height: 3.5rem;
-  border: 1px solid black;
-  background-color: rgb(9, 9, 80);
-  position: relative;
-  top: 3rem;
-  border-radius: 15px;
-  color: white;
-  position: relative;
-  top: -13rem;  
-}
-.panel-container{
-  height: 46.5rem;
-}
-.x1{
-  font-size: 0.8rem;
-  position: relative;
-  top: -14.5rem;
-  left: 1rem;
-}
-.x2{
+.img02{
+  grid-column: 2/6;
+  grid-row: 6/11;
   position: relative;
   left: 2rem;
+  top: -1rem;
 }
-.x3{
-  position: relative;
-  top: -2.1rem;
-  left: 4rem;
+#loginForm{
+  grid-column: 1/6;
+  grid-row: 11/11;
 }
-.l1{
+#loginForm input{
+  width: 330px;
+  padding: 13px;
+  font-size: 16px;
+  border: 1px solid #ccc;
+  border-radius: 10px;
+  outline: none;
+  transition: border 0.3s;
   position: relative;
-  width: 2rem;
-  height: 2rem;
-  background-color: green;
-  top: -4.5rem;
-  left: 16rem;
-  border-radius: 5px;
-}
-.l2{
-  position: relative;
-  width: 2rem;
-  height: 2rem;
-  background-color: green;
-  top: -6.5rem;
-  left: 19rem;
-  border-radius: 5px;
-}
-.l3{
-  position: relative;
-  width: 2rem;
-  height: 2rem;
-  background-color: green;
-  top: -8.5rem;
-  left: 22rem;
-  border-radius: 5px;
-}
-.l4{
-  position: relative;
-  width: 2rem;
-  height: 2rem;
-  background-color: green;
-  top: -4.5rem;
-  left: 16rem;
-  border-radius: 5px;
-}
-.l5{
-  position: relative;
-  width: 2rem;
-  height: 2rem;
-  background-color: green;
-  top: -6.5rem;
-  left: 19rem;
-  border-radius: 5px;
-}
-.l6{
-  position: relative;
-  width: 2rem;
-  height: 2rem;
-  background-color: green;
-  top: -8.5rem;
-  left: 22rem;
-  border-radius: 5px;
-}
-.l7{
-  position: relative;
-  width: 2rem;
-  height: 2rem;
-  background-color: green;
-  top: -4.5rem;
-  left: 16rem;
-  border-radius: 5px;
-}
-.l8{
-  position: relative;
-  width: 2rem;
-  height: 2rem;
-  background-color: yellow;
-  top: -6.5rem;
-  left: 19rem;
-  border-radius: 5px;
-}
-.l9{
-  position: relative;
-  width: 2rem;
-  height: 2rem;
-  background-color: green;
-  top: -8.5rem;
-  left: 22rem;
-  border-radius: 5px;
-}
-.l10{
-  position: relative;
-  width: 2rem;
-  height: 2rem;
-  background-color: green;
-  top: -4.5rem;
-  left: 16rem;
-  border-radius: 5px;
-}
-.l11{
-  position: relative;
-  width: 2rem;
-  height: 2rem;
-  background-color: green;
-  top: -6.5rem;
-  left: 19rem;
-  border-radius: 5px;
-}
-.l12{
-  position: relative;
-  width: 2rem;
-  height: 2rem;
-  background-color: green;
-  top: -8.5rem;
-  border-radius: 5px;
-  left: 22rem;
-}
-.l13{
-  position: relative;
-  width: 2rem;
-  height: 2rem;
-  background-color: green;
-  top: -4.5rem;
-  left: 16rem;
-  border-radius: 5px;
-}
-.l14{
-  position: relative;
-  width: 2rem;
-  height: 2rem;
-  background-color: green;
-  top: -6.5rem;
-  left: 19rem;
-  border-radius: 5px;
-}
-.l15{
-  position: relative;
-  width: 2rem;
-  height: 2rem;
-  background-color: red;
-  top: -8.5rem;
-  left: 22rem;
-  border-radius: 5px;
-}
-.c1{
-  position: relative;
-  top: -11.5rem;
   left: 1rem;
-  border: 1px solid black;
-  border-radius: 10px;
-  width: 4rem;
-  height: 2rem;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  background-color: rgb(9, 9, 80);
+  top: -1.2rem;
+  background-color: rgb(1, 1, 41);
   color: white;
 }
-.c2{
-  position: relative;
-  top: -13.5rem;
-  left: 21rem;
-  border: 1px solid black;
-  border-radius: 10px;
-  width: 4rem;
-  height: 2rem;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  background-color: rgb(9, 9, 80);
+#loginForm input:focus {
+  border-color: rgb(1, 1, 41);
+}
+#loginForm button {
+  padding: 12px;
+  font-size: 16px;
+  background-color: rgb(1, 1, 41);
   color: white;
-}
-.img1{
+  border: none;
+  border-radius: 10px;
+  cursor: pointer;
   position: relative;
-  top: -14rem;
-  left: 18rem;
-  width: 6rem;
+  left: 15.5rem;
+  top: 3rem;
 }
-.img2{
-  width: 10rem;
-  position: relative;
-  top: -12rem;
+
+#loginForm button:hover {
+  background-color: rgba(1, 1, 41, 0.897);
 }
-.img0{
-  width: 4rem;
+.contra-olvido{
+  width: 200px;
+  grid-column: 4/6;
+  grid-row: 12/13;
+  background-color: rgba(255, 255, 255, 0);
+  border: rgba(255, 255, 255, 0);
   position: relative;
-  left: -1rem;
-}
-.img00{
-  position: relative;
-  left: 4rem;
+  top: 1rem;
+  left: 2.5rem;
+  font-size: 0.9rem;
 }

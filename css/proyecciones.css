@@ -1,0 +1,64 @@
+.bloque-grados {
+    margin-bottom: 40px;
+    max-width: 400px;
+  }
+  
+  .titulo-grado {
+    font-size: 1.8rem;
+    margin-left: 10px;
+    margin-bottom: 15px;
+    color: #444;
+    border-left: 5px solid orange;
+    padding-left: 10px;
+  }
+  
+  .grid-grados {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+    gap: 20px;
+    padding: 0 10px;
+  }
+  
+  .tarjeta {
+    background: white;
+    border-radius: 16px;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+    text-align: center;
+    padding: 25px 15px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+  }
+  
+  .tarjeta:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 10px 20px rgba(0,0,0,0.2);
+  }
+  
+  .icono {
+    font-size: 2.2rem;
+    margin-bottom: 10px;
+    color: white;
+    background-color: #444;
+    width: 48px;
+    height: 48px;
+    line-height: 48px;
+    
+    margin: 0 auto 10px;
+  }
+  
+  .nombre-grado {
+    font-size: 1rem;
+    font-weight: 500;
+    color: #222;
+  }
+  
+  .activo {
+    outline: 3px solid orange;
+  }
+  
+  .azul    { background-color: #bbdefb; }
+  .verde   { background-color: #c8e6c9; }
+  .morado  { background-color: #d1c4e9; }
+  .naranja { background-color: #ffe0b2; }
+  .rosado  { background-color: #f8bbd0; }
+  .rojo    { background-color: #ef9a9a; }
