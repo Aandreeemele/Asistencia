@@ -1,7 +1,8 @@
 body {
   font-family: Arial, sans-serif;
   height: 100vh;
-  max-width: 100vh;         
+  max-width: 100vh;      
+  overflow: hidden;   
 }
 
 .login{

@@ -1,27 +1,57 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>App SCL Asistencias</title>
-    <link rel="stylesheet" href="css/header.css">
-    <link rel="stylesheet" href="css/contenedor.css">
-    <link rel="stylesheet" href="css/footer.css">
-    <link rel="stylesheet" href="css/alumnos.css">
-    <link rel="stylesheet" href="css/index.css">
-    <link rel="stylesheet" href="css/panel.css">
-    <link rel="stylesheet" href="css/panelSecundario.css">
-    <link rel="stylesheet" href="css/panelTres.css">
-    <link rel="stylesheet" href="css/panelCuatro.css">
-    <link rel="stylesheet" href="css/loginCinco.css">
-    <link rel="stylesheet" href="css/recuperarContra.css">
-    <link rel="stylesheet" href="css/preprimaria.css">
-    <link rel="stylesheet" href="css/primaria.css">
-    <link rel="stylesheet" href="css/proyecciones.css">
-    <link rel="stylesheet" href="css/proyeciones1.css">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>App SCL Asistencias</title>
+
+  <!-- Estilos CSS -->
+  <link rel="stylesheet" href="css/header.css" />
+  <link rel="stylesheet" href="css/contenedor.css" />
+  <link rel="stylesheet" href="css/footer.css" />
+  <link rel="stylesheet" href="css/alumnos.css" />
+  <link rel="stylesheet" href="css/index.css" />
+  <link rel="stylesheet" href="css/panel.css" />
+  <link rel="stylesheet" href="css/panelSecundario.css" />
+  <link rel="stylesheet" href="css/panelTres.css" />
+  <link rel="stylesheet" href="css/panelCuatro.css" />
+  <link rel="stylesheet" href="css/loginCinco.css" />
+  <link rel="stylesheet" href="css/recuperarContra.css" />
+  <link rel="stylesheet" href="css/preprimaria.css" />
+  <link rel="stylesheet" href="css/primaria.css" />
+  <link rel="stylesheet" href="css/proyecciones.css" />
+  <link rel="stylesheet" href="css/proyeciones1.css" />
+  <link rel="stylesheet" href="css/graficaAsistencia.css" />
+  <link rel="stylesheet" href="css/registrarAlumnos.css" />
+  <link rel="stylesheet" href="css/opciones.css" />
+  <link rel="stylesheet" href="css/uniforme.css" />
+  <link rel="stylesheet" href="css/observaciones.css" />
 </head>
 <body>
-    <main id="root"></main>
-    <script src="script.js" type="module"></script>
+  <div id="z1k"></div>
+  <main id="root"></main>
+
+  <script src="https://cdn.emailjs.com/sdk/3.9.0/email.min.js"></script>
+
+  <script>
+    window.emailjsReady = false;
+  
+    const script = document.createElement("script");
+    script.src = "https://cdn.emailjs.com/sdk/3.9.0/email.min.js";
+    script.onload = function () {
+      if (window.emailjs) {
+        emailjs.init("g8rLoZ85GUVaJ6xRk"); // Usa tu user ID real
+        window.emailjsReady = true;
+        console.log("✅ EmailJS cargado correctamente");
+      } else {
+        console.error("❌ EmailJS no cargó correctamente.");
+      }
+    };
+    document.head.appendChild(script);
+  </script>
+  
+
+  <!-- Tu script principal -->
+  <script src="script.js" type="module"></script>
 </body>
 </html>

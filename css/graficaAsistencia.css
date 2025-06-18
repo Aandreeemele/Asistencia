@@ -1,0 +1,89 @@
+.z1k{
+    width: 400px;
+}
+.k0a {
+    text-align: center;
+    width: 400px;
+    display: flex;
+    justify-content: center;
+    position: relative;
+    left: -0.2rem;
+    top: 0;
+  }
+  
+  #Vlvxr999{
+    border: 1px solid rgba(0, 0, 0, 0);
+    background-color: rgba(255, 255, 255, 0);
+    color: black;
+    font-size: 4rem;
+    position: relative;
+    top: -33rem;
+    left: -1rem;
+
+}
+#Siguixntx99{
+    font-size: 4rem;
+    border: 0.5px solid rgba(0, 0, 0, 0);
+    background-color: rgba(255, 255, 255, 0.007);
+    color: black;
+    position: relative;
+    top: -33rem;
+    left: 16rem;
+}
+  .v9x {
+    text-align: left;
+    margin-top: 1.5rem;
+    width: 400px;
+    font-size: 1rem;
+    position: relative;
+    top: 0.7rem;
+    left: 1rem;
+  }
+  
+  .m7r {
+    display: flex;
+    align-items: center;
+    gap: 0.35rem;
+    width: 400px;
+  }
+  
+  .i1t::before {
+    content: "";
+    font-size: 0.85rem;
+    line-height: 1;
+  }
+  
+  .b7l {
+    flex: 1;
+    background: #eef2f3;
+    height: 6px;
+    border-radius: 3px;
+    overflow: hidden;
+  }
+  
+  .w3e {
+    height: 100%;
+    border-radius: inherit;
+  }
+  
+  .p5s {
+    width: 34px;
+    font-size: 0.7rem;
+    text-align: right;
+  }
+  
+  .btn-z9x {
+    display: block;
+    width: 400px;
+    margin-top: 2rem;
+    padding: 0.9rem 0;
+    border: none;
+    border-radius: 8px;
+    background: #bcd0eb;
+    font-weight: 600;
+    cursor: pointer;
+  }
+  
+  .btn-z9x:hover {
+    background: #a8c2e3;
+  }

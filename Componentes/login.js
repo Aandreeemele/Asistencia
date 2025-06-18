@@ -2,22 +2,33 @@ import { showVentanaTres } from "./loginTres.js";
 import { showVentanaTresPartes } from "./loginTres1.js";
 import { showVentanaCuatro } from "./loginCuatro.js";
 import { showRecuperarContra } from "./recuperarContra.js";
-import { showPanel } from "./loginPrimero.js"; 
+import { showPanel } from "./loginPrimero.js"; // Renombrado
 import { showVentanaSecundaria } from "./loginSecundario.js";
 import { maestroGuia } from "./maestroGuia.js";
-// Usuarios válidos
+
+// Usuarios válidos (sin backend)
 const usuariosValidos = {
   "fuentes@cole.general.gt": "rm12345",
-  "florcordi@cole.general.gt": "flor12345", // ← Este inicia con loginPrimero.js
+  "florcordi@cole.general.gt": "flor12345",
   "administrador@general.gt": "adm12345"
 };
 
 document.addEventListener("DOMContentLoaded", () => {
-  if (localStorage.getItem("user")) {
-    mostrarPanel(); // ⬅ Usa nombre distinto a showPanel
-  } else {
-    showLogin();
+  const userData = localStorage.getItem("user");
+
+  if (userData) {
+    const user = JSON.parse(userData);
+    const correo = user?.correo;
+
+    if (correo && usuariosValidos[correo]) {
+      mostrarPanel(); // ← Ya está autenticado, mostrar su panel directo
+      return;
+    } else {
+      localStorage.removeItem("user"); // Datos inválidos, limpiamos
+    }
   }
+
+  showLogin(); // Si no hay sesión, mostrar login
 });
 
 function showLogin() {
@@ -51,28 +62,28 @@ function showLogin() {
     if (usuariosValidos[correo] && usuariosValidos[correo] === contrasena) {
       alert("Inicio de sesión exitoso");
       localStorage.setItem("user", JSON.stringify({ correo }));
-      mostrarPanel(); // ⬅ Llama a la función correcta
+      mostrarPanel(); // Mostrar panel según el tipo de usuario
     } else {
       alert("Credenciales incorrectas o usuario no existe");
     }
   });
 }
 
-// ⬇ Renombramos esta función para evitar conflicto
 function mostrarPanel() {
-    const user = JSON.parse(localStorage.getItem("user"));
-    const correo = user?.correo;
-  
-    if (correo === "florcordi@cole.general.gt") { // ← corregido
-      showPanel(); // función importada desde loginPrimero.js
-    } else if (correo === "fuentes@cole.general.gt") {
-      maestroGuia();
-    } else if (correo === "administrador@general.gt") {
-      showPanel();
-    } else {
-      showVentanaTres();
-    }
+  const user = JSON.parse(localStorage.getItem("user"));
+  const correo = user?.correo;
+
+  console.log("Usuario activo:", correo);
+
+  if (correo === "florcordi@cole.general.gt") {
+    showPanel(); // Panel para Flor
+  } else if (correo === "fuentes@cole.general.gt") {
+    maestroGuia(); // Panel para maestro guía
+  } else if (correo === "administrador@general.gt") {
+    showFlorPanel(); // También usa el mismo panel (puedes cambiarlo)
+  } else {
+    showVentana(); // Otro panel por defecto
   }
-  
+}
 
 export { showLogin };

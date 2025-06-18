@@ -1,0 +1,134 @@
+/* Contenedor principal */
+.panxxlcontainer {
+    max-width: 400px;
+    height: 800px;
+    display: grid;
+    grid-template-columns: repeat(8, 51px);
+    grid-template-rows: repeat(17, 50px);
+    border-radius: 15px;
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.15);
+}
+
+/* Botones navegación */
+#btnVolver {
+    border: none;
+    background-color: transparent;
+    color: black;
+    font-size: 2.5rem;
+    grid-column: 1;
+    grid-row: 2/3;
+    position: relative;
+    left: -0.5rem;
+    cursor: pointer;
+}
+
+#btnSiguiente {
+    font-size: 2.5rem;
+    border: none;
+    background-color: transparent;
+    color: black;
+    grid-column: 8;
+    grid-row: 2/3;
+    cursor: pointer;
+}
+
+/* Título y subtítulo */
+.titPrincipal {
+    font-size: 1.8rem;
+    font-weight: bold;
+    color: #002f6c;
+    grid-column: 4;
+    grid-row: 2;
+    position: relative;
+    left: 0.5rem;
+    text-align: center;
+}
+
+.subtitulo {
+    font-size: 1.2rem;
+    grid-column: 2/8;
+    grid-row: 3;
+    color: #555;
+    text-align: center;
+}
+
+/* Botón agregar alumno */
+#btnAgregarAlumno {
+    grid-column: 3/7;
+    grid-row: 4;
+    margin: auto;
+    padding: 0.5rem 1rem;
+    background-color: #003366;
+    color: white;
+    border: none;
+    border-radius: 20px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+#btnAgregarAlumno:hover {
+    background-color: #0050a1;
+}
+
+/* Contenedor alumnos */
+#contenedorAlumnos {
+    grid-row: 5/18;
+    grid-column: 1/9;
+    position: relative;
+    left: 0.3rem;
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 10px;
+    padding: 0.5rem;
+    overflow-y: auto;
+}
+
+/* Tarjeta de alumno */
+.alumno-card {
+    background-color: #031547;
+    color: white;
+    border-radius: 25px;
+    padding: 0.5rem 1rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    font-size: 0.9rem;
+    height: 2.5rem;
+}
+
+.alumno-info {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.acciones-alumno {
+    display: flex;
+    gap: 0.3rem;
+}
+
+.acciones-alumno button {
+    background-color: #1c3a70;
+    color: white;
+    border: none;
+    border-radius: 6px;
+    padding: 0.3rem 0.5rem;
+    font-size: 0.85rem;
+    cursor: pointer;
+    transition: background-color 0.2s;
+}
+
+.acciones-alumno button:hover {
+    background-color: #2a56a5;
+}
+
+.detalle-alumno {
+    margin-top: 0.5rem;
+    background-color: #ffffff10;
+    padding: 0.5rem;
+    border-left: 3px solid #89c4ff;
+    border-radius: 10px;
+    display: none;
+    color: #ddd;
+}

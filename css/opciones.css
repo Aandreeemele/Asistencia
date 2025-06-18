@@ -1,0 +1,174 @@
+.panel-container4{
+    max-width: 400px;
+    height: 800px;
+}
+#Volvxr{
+    border: 1px solid rgba(0, 0, 0, 0);
+    background-color: rgba(255, 255, 255, 0);
+    color: black;
+    font-size: 4rem;
+    position: relative;
+    left: -1rem;
+    top: 3.5rem;
+}
+#Siguientx1{
+    font-size: 4rem;
+    border: 0.5px solid rgba(0, 0, 0, 0);
+    background-color: rgba(255, 255, 255, 0.007);
+    color: black;
+    position: relative;
+    left: 15rem;
+    top: 3.5rem;
+}
+.TitulodelDocente{
+    position: relative;
+    top: 5rem;
+    left: 8rem;
+}
+.Enero{
+    position: relative;
+    top: 7rem;
+    left: 10rem;
+}
+#SCalendario{
+    width: 5px;
+    border: 1px solid rgba(0, 0, 0, 0);
+    background-color: rgba(255, 255, 255, 0);
+    color: black;
+    font-size: 2rem;
+    position: relative;
+    top: -0em;
+    left: 2.5rem;
+}
+.Semana1{
+    position: relative;
+    left: -6rem;
+    display: grid;
+    grid-template-columns: repeat(1, 100px 30px 30px 30px 30px 30px);
+    
+}
+.S1, .S2, .S3, .S4, .S5{
+    width: 20px;
+    height: 20px;
+    border: 1px solid green;
+    border-radius: 50px;
+    background-color: green;
+   
+}
+.Semana2{
+    position: relative;
+    left: -6rem;
+    display: grid;
+    grid-template-columns: repeat(1, 100px 30px 30px 30px 30px 30px);
+    
+}
+.S01, .S02, .S03, .S04, .S05{
+    width: 20px;
+    height: 20px;
+    border: 1px solid green;
+    border-radius: 50px;
+    background-color: green;
+    
+   
+}
+.Semana3{
+    position: relative;
+    left: -6rem;
+    display: grid;
+    grid-template-columns: repeat(1, 100px 30px 30px 30px 30px 30px);
+    
+}
+.S001, .S002, .S003, .S004, .S005{
+    width: 20px;
+    height: 20px;
+    border: 1px solid green;
+    border-radius: 50px;
+    background-color: green;
+    
+   
+}
+.Semana4{
+    position: relative;
+    left: -6rem;
+    display: grid;
+    grid-template-columns: repeat(1, 100px 30px 30px 30px 30px 30px);
+    
+}
+.S0001, .S0002, .S0003, .S0004, .S0005{
+    width: 20px;
+    height: 20px;
+    border: 1px solid green;
+    border-radius: 50px;
+    background-color: green;
+    
+   
+}
+#SCalendario1{
+    width: 5px;
+    border: 1px solid rgba(0, 0, 0, 0);
+    background-color: rgba(255, 255, 255, 0);
+    color: black;
+    font-size: 2rem;
+    position: relative;
+    left: 1.5rem;
+}
+#SCalendario01{
+    width: 5px;
+    border: 1px solid rgba(0, 0, 0, 0);
+    background-color: rgba(255, 255, 255, 0);
+    color: black;
+    font-size: 2rem;
+    position: relative;
+    top: -2.5rem;
+    left: -5rem;
+}
+.botonesExtras{
+    position: relative;
+    top: 12rem;
+}
+#btnUniforme{
+    width: 355px;
+    height: 2.5rem;
+    border: 1px solid black;
+    border-radius: 15px;
+    position: relative;
+    left: 1rem;
+    background-color: rgb(4, 4, 51);
+    color: white;
+
+}
+#btnReporte{
+    width: 350px;
+    height: 2.5rem;
+    border: 1px solid black;
+    border-radius: 15px;
+    position: relative;
+    left: 1rem;
+    top: 0.5rem;
+    background-color: rgb(4, 4, 51);
+    color: white;
+}
+
+#btnObservaciones{
+    width: 350px;
+    height: 2.5rem;
+    border: 1px solid black;
+    border-radius: 15px;
+    position: relative;
+    left: 1rem;
+    top: 1rem;
+    background-color: rgb(4, 4, 51);
+    color: white;
+}
+
+#btnActualizar{
+    width: 350px;
+    height: 2.5rem;
+    border: 1px solid black;
+    border-radius: 15px;
+    position: relative;
+    left: 1rem;
+    top: 1.5rem;
+    background-color: rgb(4, 4, 51);
+    color: white;
+}

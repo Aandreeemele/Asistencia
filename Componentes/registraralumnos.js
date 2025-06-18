@@ -1,5 +1,5 @@
-import { showVentanaSecundaria } from "./loginSecundario.js";
-import { showVentanaCuatro } from "./loginCuatro.js";
+import { zz7 } from "./graficaAsistencia.js";
+import { showopciones } from "./opciones.js";
 
 function registrarAlumnos() {
     const root = document.getElementById("root");
@@ -17,28 +17,31 @@ function registrarAlumnos() {
     let alumnos = cargarAlumnos();
     let indexAEliminar = null;
 
-    alumnos.forEach((nombre, index) => crearElementoAlumno(nombre, index, contenedor, alumnos, modal, setIndexEliminar));
+    alumnos.forEach((nombre, index) => {
+        crearElementoAlumno(nombre, index, contenedor, alumnos, modal, setIndexEliminar);
+    });
 
-    btnVolver.addEventListener("click", showVentanaSecundaria);
-    btnSiguiente.addEventListener("click", showVentanaCuatro);
+    // ✅ Estos botones funcionan correctamente si zz7 y showopciones están bien importados
+    btnVolver?.addEventListener("click", zz7);
+    btnSiguiente?.addEventListener("click", showopciones);
 
-    btnAgregarAlumno.addEventListener("click", () => {
+    btnAgregarAlumno?.addEventListener("click", () => {
         const nuevoNombre = `Alumno ${alumnos.length + 1}`;
         alumnos.push(nuevoNombre);
         guardarAlumnos(alumnos);
         crearElementoAlumno(nuevoNombre, alumnos.length - 1, contenedor, alumnos, modal, setIndexEliminar);
     });
 
-    btnCancelar.addEventListener("click", () => {
+    btnCancelar?.addEventListener("click", () => {
         modal.style.display = "none";
         indexAEliminar = null;
     });
 
-    btnConfirmar.addEventListener("click", () => {
+    btnConfirmar?.addEventListener("click", () => {
         if (indexAEliminar !== null) {
             alumnos.splice(indexAEliminar, 1);
             guardarAlumnos(alumnos);
-            showVentanaTres(); // recarga la vista correctamente
+            registrarAlumnos(); // 👈 Recarga la vista actual con la lista actualizada
         }
     });
 
@@ -94,20 +97,16 @@ function crearElementoAlumno(nombre, index, contenedor, alumnos, modal, setIndex
     const btnInfo = div.querySelector(".btn-info");
     const detalle = div.querySelector(`#info-${index}`);
 
-    btnEliminar.addEventListener("click", (e) => {
+    btnEliminar?.addEventListener("click", (e) => {
         const idx = parseInt(e.target.getAttribute("data-index"));
         setIndexEliminar(idx);
         modal.style.display = "block";
     });
 
-    btnInfo.addEventListener("click", () => {
-        if (detalle.style.display === "none") {
-            detalle.style.display = "block";
-            btnInfo.textContent = "Ocultar";
-        } else {
-            detalle.style.display = "none";
-            btnInfo.textContent = "📲";
-        }
+    btnInfo?.addEventListener("click", () => {
+        const isHidden = detalle.style.display === "none";
+        detalle.style.display = isHidden ? "block" : "none";
+        btnInfo.textContent = isHidden ? "Ocultar" : "📲";
     });
 }
 
