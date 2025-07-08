@@ -1,5 +1,5 @@
 import { showLogin } from "../login.js";
-
+import { BASE_URL } from "../config.js";
 export function crearFormularioRegistroX() {
   document.body.innerHTML = "";
 
@@ -112,7 +112,7 @@ export function crearFormularioRegistroX() {
         rolx: rol,
       };
 
-      fetch("http://localhost:8000/registro", {
+      fetch(`${BASE_URL}/registro`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(objUsuarioX),

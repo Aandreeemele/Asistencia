@@ -2,6 +2,7 @@ import { showRecuperarContra } from "./Componentes/recuperarContra.js";
 import { showPanel } from "./Componentes/loginPrimero.js"; 
 import { maestroGuia } from "./Componentes/maestroGuia.js";
 import { crearFormularioRegistroX } from "./Componentes/registro.js";
+import { BASE_URL } from "./config.js";
 
 document.addEventListener("DOMContentLoaded", () => {
   const userData = localStorage.getItem("user");
@@ -11,19 +12,19 @@ document.addEventListener("DOMContentLoaded", () => {
     const correo = user?.correo;
 
     if (correo) {
-      mostrarPanel(); // Ya está autenticado, mostrar su panel directo
+      mostrarPanel(); 
       return;
     } else {
-      localStorage.removeItem("user"); // Datos inválidos, limpiamos
+      localStorage.removeItem("user");
     }
   }
 
-  showLogin(); // Si no hay sesión, mostrar login
+  showLogin();
 });
 
 function showLogin() {
   const root = document.getElementById("root");
-  root.innerHTML = ""; // limpiar contenido anterior
+  root.innerHTML = "";
 
   const loginDiv = document.createElement("div");
   loginDiv.className = "login";
@@ -98,18 +99,17 @@ function showLogin() {
     crearFormularioRegistroX();
   });
 
-  // ✅ Login real con backend corregido
   form.addEventListener("submit", async (e) => {
     e.preventDefault();
 
     const correo = inputCorreo.value.trim();
-    const contrasena = inputContrasena.value; // <-- CORREGIDO
+    const contrasena = inputContrasena.value; 
 
     try {
-      const res = await fetch("http://localhost:8000/login", {
+      const res = await fetch(`${BASE_URL}/login`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ correo, contrasena }) // <-- CORREGIDO
+        body: JSON.stringify({ correo, contrasena }) 
       });
 
       if (!res.ok) {
@@ -118,7 +118,7 @@ function showLogin() {
 
       const usuario = await res.json();
       alert("Inicio de sesión exitoso");
-      usuario.contraseña = contrasena; // Guardar la contraseña para validación posterior
+      usuario.contraseña = contrasena; 
       localStorage.setItem("user", JSON.stringify(usuario));
 
       mostrarPanel();
@@ -132,26 +132,30 @@ function showLogin() {
 
 function mostrarPanel() {
   const user = JSON.parse(localStorage.getItem("user"));
-  const correo = user?.correo;
+  const rol = user?.rol;
+  console.log("Rol del usuario:", rol);
 
-  console.log("Usuario activo:", correo);
+  switch (rol) {
+    case "coordinador":
+      console.log("🟢 Mostrando panel para Coordinador");
+      showPanel();
+      break;
 
-  if (correo === "florcordi@cole.general.gt") {
-    console.log("🟢 Mostrando panel para Flor");
-    showPanel();
-  } else if (correo === "fuentes@cole.general.gt") {
-    console.log("🟡 Mostrando panel para Fuentes");
-    maestroGuia();
-  } else if (correo === "administrador@general.gt") {
-    console.log("🔵 Mostrando panel para Administrador");
-    showPanel();
-  } else {
-    console.log("⚪ Usuario genérico");
-    showPanel();
+    case "maestro":
+      console.log("🟡 Mostrando panel para Maestro");
+      maestroGuia();
+      break;
+
+    case "admin":
+      console.log("🔵 Mostrando panel para Admin");
+      showPanel(); // puedes cambiarlo luego
+      break;
+
+    default:
+      console.log("⚪ Usuario sin rol específico");
+      showPanel();
+      break;
   }
 }
-
-
-
 
 export { showLogin };

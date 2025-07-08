@@ -26,7 +26,7 @@ async function mostrarTablaAsistencias() {
   wrapper.style.background = "white";
 
   try {
-    const res = await fetch("http://localhost:8000/alumnos");
+    const res = await fetch("	https://asisten.proyecttoscl.space/alumnos");
     const alumnos = await res.json();
 
     if (!alumnos.length) {

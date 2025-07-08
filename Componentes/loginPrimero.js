@@ -4,7 +4,7 @@ import { showPrePrimaria } from "./preprimaria.js";
 import { showPrimaria } from "./primaria.js";
 import { showBasicos } from "./basicos.js";
 import { datosGrados, generarVistaGrado } from "./proyecciones.js";
-
+import { BASE_URL } from "../config.js";
 const accionesNivel = {
   Preprimaria: showPrePrimaria,
   Primaria: showPrimaria,
@@ -14,7 +14,7 @@ const accionesNivel = {
 
 async function showPanel() {
   try {
-    const response = await fetch("http://localhost:8000/niveles");
+    const response = await fetch(`${BASE_URL}/niveles`);
     if (!response.ok) throw new Error("Error al obtener niveles académicos");
     const niveles = await response.json();
 

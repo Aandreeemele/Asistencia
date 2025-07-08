@@ -1,5 +1,5 @@
 import { showLogin } from "../login.js";
-
+import { BASE_URL } from "../config.js";
 function showRecuperarContra() {
   document.body.innerHTML = "";
   const root = document.createElement("div");
@@ -97,7 +97,7 @@ function showRecuperarContra() {
     };
 
     try {
-      const res = await fetch("http://localhost:8000/cambiar-contrasena", {
+      const res = await fetch(`${BASE_URL}/cambiar-contrasena`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(datos)
