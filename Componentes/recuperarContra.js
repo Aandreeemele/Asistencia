@@ -1,93 +1,142 @@
-import { showLogin } from "./login.js";
+import { showLogin } from "../login.js";
 
 function showRecuperarContra() {
-    const root = document.getElementById("root");
-    root.innerHTML = `
-        <div class="recuperar">
-            <h2>𝚁𝚎𝚌𝚞𝚙𝚎𝚛𝚊𝚛 𝙲𝚘𝚗𝚝𝚛𝚊𝚜𝚎ñ𝚊</h2>
+  document.body.innerHTML = "";
+  const root = document.createElement("div");
+  root.id = "root";
+  document.body.appendChild(root);
 
-            <!-- Fase 1 -->
-            <div id="fase1">
-                <p>Ingresa tu correo electrónico o usuario:</p>
-                <input type="text" id="usuarioCorreo" placeholder="Correo o Usuario">
-                <button id="enviarCodigo">Enviar código</button>
-            </div>
+  const contenedor = crearElemento("div", "recuperar");
 
-            <img src="222 1.svg" alt="" class="imgrecu">
+  const titulo = crearElemento("h2", "", "𝚁𝚎𝚌𝚞𝚙𝚎𝚛𝚊𝚛 𝙲𝚘𝚗𝚝𝚛𝚊𝚜𝚎ñ𝚊");
+  const imagen = document.createElement("img");
+  imagen.src = "./assets/222 1.svg";
+  imagen.alt = "";
+  imagen.className = "imgrecu";
 
-            <!-- Fase 2 -->
-            <div id="fase2" style="display:none;">
-                <p>Hemos enviado un código: <strong id="codigoGenerado"></strong></p>
-                <input type="text" id="codigoIngresado" placeholder="Ingresa el código">
-                <button id="verificarCodigo">Verificar</button>
-            </div>
+  // Fase 1
+  const fase1 = crearElemento("div");
+  fase1.id = "fase1";
+  const p1 = crearElemento("p", "", "Ingresa tu correo electrónico:");
+  const inputCorreo = crearInput("usuarioCorreo", "Correo electrónico");
+  const btnCodigo = crearBoton("enviarCodigo", "Enviar código");
+  fase1.append(p1, inputCorreo, btnCodigo);
 
-            <!-- Fase 3 -->
-            <div id="fase3" style="display:none;">
-                <p>Ingresa tu nueva contraseña:</p>
-                <input type="password" id="nuevaContra" placeholder="Nueva contraseña">
-                <input type="password" id="verificarContra" placeholder="Repetir contraseña">
-                <button id="guardarContra">Guardar Contraseña</button>
-            </div>
-        </div>
-    `;
+  // Fase 2
+  const fase2 = crearElemento("div");
+  fase2.id = "fase2";
+  fase2.style.display = "none";
+  const p2 = crearElemento("p", "", "Hemos enviado un código: ");
+  const strong = document.createElement("strong");
+  strong.id = "codigoGenerado";
+  p2.appendChild(strong);
+  const inputCodigo = crearInput("codigoIngresado", "Ingresa el código");
+  const btnVerificar = crearBoton("verificarCodigo", "Verificar");
+  fase2.append(p2, inputCodigo, btnVerificar);
 
-    let codigoReal = "";
+  // Fase 3
+  const fase3 = crearElemento("div");
+  fase3.id = "fase3";
+  fase3.style.display = "none";
+  const p3 = crearElemento("p", "", "Ingresa tu nueva contraseña:");
+  const nuevaContra = crearInput("nuevaContra", "Nueva contraseña", "password");
+  const verificarContra = crearInput("verificarContra", "Repetir contraseña", "password");
+  const btnGuardar = crearBoton("guardarContra", "Guardar Contraseña");
+  fase3.append(p3, nuevaContra, verificarContra, btnGuardar);
 
-    // 👉 FASE 1: Enviar código
-    document.getElementById("enviarCodigo").addEventListener("click", () => {
-        const user = document.getElementById("usuarioCorreo").value.trim();
-        if (!user) return alert("Ingresa un correo o usuario.");
+  contenedor.append(titulo, fase1, imagen, fase2, fase3);
+  root.appendChild(contenedor);
 
-        codigoReal = Math.floor(100000 + Math.random() * 900000).toString();
-        document.getElementById("codigoGenerado").textContent = codigoReal;
+  // Lógica
+  let codigoReal = "";
 
-        alert("Tu código es: " + codigoReal); // ✅ Mostrar alerta con el código
+  btnCodigo.addEventListener("click", () => {
+    const user = inputCorreo.value.trim();
+    if (!user) return alert("Ingresa un correo válido.");
 
-        document.getElementById("fase1").style.display = "none";
-        document.getElementById("fase2").style.display = "block";
-    });
+    codigoReal = Math.floor(100000 + Math.random() * 900000).toString();
+    strong.textContent = codigoReal;
 
-    // 👉 FASE 2: Verificar código
-    document.getElementById("verificarCodigo").addEventListener("click", () => {
-        const codigoIngresado = document.getElementById("codigoIngresado").value.trim();
+    alert("Tu código es: " + codigoReal);
+    fase1.style.display = "none";
+    fase2.style.display = "block";
+  });
 
-        if (codigoIngresado === codigoReal) {
-            document.getElementById("fase2").style.display = "none";
-            document.getElementById("fase3").style.display = "block";
-        } else {
-            alert("Código incorrecto.");
-        }
-    });
+  btnVerificar.addEventListener("click", () => {
+    const ingresado = inputCodigo.value.trim();
+    if (ingresado === codigoReal) {
+      fase2.style.display = "none";
+      fase3.style.display = "block";
+    } else {
+      alert("Código incorrecto.");
+    }
+  });
 
-    // 👉 FASE 3: Guardar contraseña
-    document.getElementById("guardarContra").addEventListener("click", async () => {
-        const nueva = document.getElementById("nuevaContra").value.trim();
-        const repetir = document.getElementById("verificarContra").value.trim();
-        const user = document.getElementById("usuarioCorreo").value.trim();
+  btnGuardar.addEventListener("click", async () => {
+    const nueva = nuevaContra.value.trim();
+    const repetir = verificarContra.value.trim();
+    const user = inputCorreo.value.trim();
 
-        if (nueva !== repetir) return alert("Las contraseñas no coinciden.");
-        if (nueva.length < 4) return alert("La contraseña debe tener al menos 4 caracteres.");
+    if (nueva !== repetir) return alert("Las contraseñas no coinciden.");
+    if (nueva.length < 4) return alert("La contraseña debe tener al menos 4 caracteres.");
 
-        try {
-            const response = await fetch("http://localhost:3000/cambiar-contrasena", {
-                method: "POST",
-                headers: { "Content-Type": "application/json" },
-                body: JSON.stringify({ correo: user, nuevaContrasena: nueva })
-            });
+    const quiereCambiar = confirm("¿Te gustaría cambiar tu nombre o apellido?");
+    let nuevoNombre = null;
+    let nuevoApellido = null;
 
-            if (response.ok) {
-                alert("Contraseña actualizada correctamente.");
-                showLogin(); // ✅ Volver al login
-            } else {
-                alert("Error al actualizar la contraseña.");
-            }
-        } catch (err) {
-            alert("Error de red al guardar contraseña.");
-        }
-    });
+    if (quiereCambiar) {
+      nuevoNombre = prompt("Nuevo nombre (deja vacío si no quieres cambiarlo):")?.trim();
+      nuevoApellido = prompt("Nuevo apellido (deja vacío si no quieres cambiarlo):")?.trim();
+    }
 
-    document.getElementById("guardarContra").addEventListener("click", showPanel);
+    const datos = {
+      correo: user,
+      nuevaContrasena: nueva,
+      nuevoNombre: nuevoNombre || null,
+      nuevoApellido: nuevoApellido || null
+    };
+
+    try {
+      const res = await fetch("http://localhost:8000/cambiar-contrasena", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(datos)
+      });
+
+      if (res.ok) {
+        alert("✅ Información actualizada correctamente.");
+        showLogin();
+      } else {
+        alert("❌ No se pudo cambiar los datos.");
+      }
+    } catch (err) {
+      alert("❌ Error de red.");
+      console.error(err);
+    }
+  });
+}
+
+// Helpers
+function crearElemento(tag, clase = "", texto = "") {
+  const el = document.createElement(tag);
+  if (clase) el.className = clase;
+  if (texto) el.textContent = texto;
+  return el;
+}
+
+function crearInput(id, placeholder, tipo = "text") {
+  const input = document.createElement("input");
+  input.type = tipo;
+  input.id = id;
+  input.placeholder = placeholder;
+  return input;
+}
+
+function crearBoton(id, texto) {
+  const btn = document.createElement("button");
+  btn.id = id;
+  btn.textContent = texto;
+  return btn;
 }
 
 export { showRecuperarContra };

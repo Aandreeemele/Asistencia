@@ -1,0 +1,39 @@
+.cuadroZ9 {
+    padding: 20px;
+    box-shadow: 0 0 10px rgba(0,0,0,0.25);
+    width: 310px;
+  }
+  
+  .tituloX7 {
+    position: relative;
+    left: rem;
+  }
+  
+  .campoJ3 {
+    width: 100%;
+    padding: 9px;
+    margin: 8px 0;
+    border-radius: 6px;
+    border: 1px solid #ccc;
+  }
+  
+  .botonQ2 {
+    width: 100%;
+    padding: 10px;
+    margin-top: 6px;
+    background-color: #04131f;
+    color: white;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+  }
+  
+  .botonQ2:hover {
+    background-color: #05122b;
+  }
+  
+  .mensajeK5 {
+    text-align: center;
+    margin-top: 10px;
+    font-size: 14px;
+  }

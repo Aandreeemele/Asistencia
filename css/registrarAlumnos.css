@@ -40,7 +40,7 @@
     grid-column: 4;
     grid-row: 2;
     position: relative;
-    left: 0.5rem;
+    left: -0.5rem;
     text-align: center;
 }
 
@@ -49,7 +49,8 @@
     grid-column: 2/8;
     grid-row: 3;
     color: #555;
-    text-align: center;
+    position: relative;
+    left: -0.1rem;
 }
 
 /* Botón agregar alumno */
@@ -73,10 +74,11 @@
 
 /* Contenedor alumnos */
 #contenedorAlumnos {
-    grid-row: 5/18;
+    grid-row: 5/15;
     grid-column: 1/9;
     position: relative;
     left: 0.3rem;
+    width: 23rem;
     display: grid;
     grid-template-columns: 1fr;
     gap: 10px;
@@ -131,4 +133,56 @@
     border-radius: 10px;
     display: none;
     color: #ddd;
+}
+.modal-content{
+    margin: auto;
+}
+
+#btnMarcarTodos{
+    background-color: green;
+    color: white;
+    grid-row: 15;
+    grid-column: 2;
+    width: 5rem;
+    border: green;
+    border-radius: 10px;
+    position: relative;
+    top: 0.5rem;
+    left: -1rem;
+}
+#btnEnviarCorreos{
+    background-color: #031547;
+    color: white;
+    grid-row: 15;
+    grid-column: 4;
+    width: 5rem;
+    border: #031547;
+    border-radius: 10px;
+    position: relative;
+    left: 8.5rem;
+    top: 0.5rem;
+}
+#btnMarcarTarde{
+    background-color: orange;
+    color: white;
+    grid-row: 15;
+    grid-column: 6;
+    width: 5rem;
+    border: orange;
+    border-radius: 10px;
+    position: relative;
+    left: -3.2rem;
+    top: 0.5rem;
+}
+#btnMarcarTodosAusentes{
+    background-color: red;
+    color: white;
+    grid-row: 15;
+    grid-column: 6;
+    width: 5rem;
+    border: red;
+    border-radius: 10px;
+    position: relative;
+    left: -8.5rem;
+    top: 0.5rem;
 }

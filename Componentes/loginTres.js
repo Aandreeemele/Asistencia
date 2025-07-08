@@ -1,122 +1,112 @@
-import { showVentanaSecundaria } from "./loginSecundario.js";
-import { showVentanaCuatro } from "./loginCuatro.js";
+function showVentanaCuatro() {
+  const root = document.getElementById("root");
+  root.innerHTML = "";
 
-function showVentanaTres() {
-    const root = document.getElementById("root");
-    root.innerHTML = getTemplateHTML();
+  const meses = [
+    "Enero", "Febrero", "Marzo", "Abril", "Mayo", "Junio",
+    "Julio", "Agosto", "Septiembre", "Octubre", "Noviembre", "Diciembre"
+  ];
 
-    const btnVolver = document.getElementById("btnVolver");
-    const btnSiguiente = document.getElementById("btnSiguiente");
-    const btnAgregarDocente = document.getElementById("btnAgregarDocente");
+  let mesActual = new Date().getMonth();
+  const year = new Date().getFullYear();
 
-    const contenedor = document.getElementById("contenedorDocentes");
-    const modal = document.getElementById("modalEliminar");
-    const btnCancelar = document.getElementById("btnCancelarEliminar");
-    const btnConfirmar = document.getElementById("btnConfirmarEliminar");
+  const asistenciaGuardada = JSON.parse(localStorage.getItem("asistenciaMes")) || {};
 
-    let docentes = cargarDocentes();
-    let indexAEliminar = null;
+  function renderizarMes() {
+    root.innerHTML = "";
 
-    docentes.forEach((nombre, index) => crearElementoDocente(nombre, index, contenedor, docentes, modal, setIndexEliminar));
+    const contenedor = document.createElement("div");
+    contenedor.style.maxWidth = "400px";
+    contenedor.style.margin = "auto";
+    contenedor.style.padding = "20px";
+    contenedor.style.border = "1px solid #ccc";
+    contenedor.style.borderRadius = "12px";
+    contenedor.style.fontFamily = "sans-serif";
 
-    btnVolver.addEventListener("click", showVentanaSecundaria);
-    btnSiguiente.addEventListener("click", showVentanaCuatro);
+    const tituloMes = document.createElement("div");
+    tituloMes.className = "tituloMes";
+    tituloMes.textContent = `${meses[mesActual]} ${year}`;
 
-    btnAgregarDocente.addEventListener("click", () => {
-        const nuevoNombre = `Docente ${docentes.length + 1}`;
-        docentes.push(nuevoNombre);
-        guardarDocentes(docentes);
-        crearElementoDocente(nuevoNombre, docentes.length - 1, contenedor, docentes, modal, setIndexEliminar);
+    const controles = document.createElement("div");
+    controles.className = "controlesMes";
+
+    const btnAnterior = document.createElement("button");
+    btnAnterior.textContent = "←";
+    btnAnterior.onclick = () => {
+      mesActual = (mesActual - 1 + 12) % 12;
+      renderizarMes();
+    };
+
+    const btnSiguiente = document.createElement("button");
+    btnSiguiente.textContent = "→";
+    btnSiguiente.onclick = () => {
+      mesActual = (mesActual + 1) % 12;
+      renderizarMes();
+    };
+
+    controles.appendChild(btnAnterior);
+    controles.appendChild(btnSiguiente);
+
+    const grid = document.createElement("div");
+    grid.className = "calendario-grid";
+
+    const diasSemana = ["L", "M", "M", "J", "V", "S", "D"];
+    diasSemana.forEach(dia => {
+      const celda = document.createElement("div");
+      celda.textContent = dia;
+      celda.style.fontWeight = "bold";
+      grid.appendChild(celda);
     });
 
-    btnCancelar.addEventListener("click", () => {
-        modal.style.display = "none";
-        indexAEliminar = null;
-    });
+    const primerDia = new Date(year, mesActual, 1).getDay();
+    const diasEnMes = new Date(year, mesActual + 1, 0).getDate();
 
-    btnConfirmar.addEventListener("click", () => {
-        if (indexAEliminar !== null) {
-            docentes.splice(indexAEliminar, 1);
-            guardarDocentes(docentes);
-            showVentanaTres(); // <--- CORREGIDO: recarga la vista correctamente
-        }
-    });
-
-    function setIndexEliminar(index) {
-        indexAEliminar = index;
+    const claveMes = `${year}-${mesActual}`;
+    if (!asistenciaGuardada[claveMes]) {
+      asistenciaGuardada[claveMes] = {};
     }
-}
 
-function getTemplateHTML() {
-    return `
-        <div class="panxxlcontainer">
-            <img src="fondo 3.svg" alt="" class="imgpanel">
-            <button id="btnVolver">←</button>
-            <button id="btnSiguiente">→</button>
-            <p class="titPrincipal">𝙼𝙰𝚁𝙲𝙰𝚁</p>
-            <p class="subtitulo">𝙿𝙴𝚁𝚂𝙾𝙽𝙰𝙻 𝙳𝙾𝙲𝙴𝙽𝚃𝙴</p>
-            <button id="btnAgregarDocente">Agregar Docente</button>
-            <div id="contenedorDocentes"></div>
-            <div id="modalEliminar" class="modal" style="display:none;">
-                <div class="modal-content">
-                    <p>¿Estás seguro de eliminar el docente? Se perderán las informaciones.</p>
-                    <button id="btnCancelarEliminar">Cancelar</button>
-                    <button id="btnConfirmarEliminar">Eliminar</button>
-                </div>
-            </div>
-        </div>
-    `;
-}
+    for (let i = 0; i < (primerDia === 0 ? 6 : primerDia - 1); i++) {
+      const vacio = document.createElement("div");
+      vacio.className = "dia vacio";
+      grid.appendChild(vacio);
+    }
 
-function crearElementoDocente(nombre, index, contenedor, docentes, modal, setIndexEliminar) {
-    const div = document.createElement("div");
-    div.className = "docente-card";
-    div.innerHTML = `
-        <div class="docente-info">
-            <span>${nombre}</span>
-            <div class="acciones-docente">
-                <button class="btn-info" data-index="${index}">📲</button>
-                <button class="btn-eliminar" data-index="${index}">Eliminar</button>
-                <button class="btn-asistio">✓</button>
-                <button class="btn-no-asistio">x</button>
-            </div>
-        </div>
-        <div class="detalle-docente" id="info-${index}" style="display: none;">
-            <p><strong>Nombre:</strong> ${nombre}</p>
-            <p><strong>Área:</strong> Matemáticas</p>
-            <p><strong>Email:</strong> docente${index + 1}@ejemplo.com</p>
-            <p><strong>Teléfono:</strong> 1456-0789${index}</p>
-        </div>
-    `;
-    contenedor.appendChild(div);
+    for (let dia = 1; dia <= diasEnMes; dia++) {
+      const celda = document.createElement("div");
+      celda.className = "dia";
+      celda.textContent = dia;
 
-    const btnEliminar = div.querySelector(".btn-eliminar");
-    const btnInfo = div.querySelector(".btn-info");
-    const detalle = div.querySelector(`#info-${index}`);
+      const estado = asistenciaGuardada[claveMes][dia];
+      if (estado === "asistio") celda.classList.add("asistio");
+      if (estado === "falto") celda.classList.add("falto");
 
-    btnEliminar.addEventListener("click", (e) => {
-        const idx = parseInt(e.target.getAttribute("data-index"));
-        setIndexEliminar(idx);
-        modal.style.display = "block";
-    });
-
-    btnInfo.addEventListener("click", () => {
-        if (detalle.style.display === "none") {
-            detalle.style.display = "block";
-            btnInfo.textContent = "Ocultar";
+      celda.onclick = () => {
+        if (!asistenciaGuardada[claveMes][dia]) {
+          asistenciaGuardada[claveMes][dia] = "asistio";
+          celda.classList.add("asistio");
+        } else if (asistenciaGuardada[claveMes][dia] === "asistio") {
+          asistenciaGuardada[claveMes][dia] = "falto";
+          celda.classList.remove("asistio");
+          celda.classList.add("falto");
         } else {
-            detalle.style.display = "none";
-            btnInfo.textContent = "📲";
+          delete asistenciaGuardada[claveMes][dia];
+          celda.classList.remove("falto");
         }
-    });
+
+        localStorage.setItem("asistenciaMes", JSON.stringify(asistenciaGuardada));
+      };
+
+      grid.appendChild(celda);
+    }
+
+    contenedor.appendChild(tituloMes);
+    contenedor.appendChild(controles);
+    contenedor.appendChild(grid);
+    root.appendChild(contenedor);
+  }
+
+  renderizarMes();
 }
 
-function cargarDocentes() {
-    return JSON.parse(localStorage.getItem("docentes")) || [];
-}
-
-function guardarDocentes(docentes) {
-    localStorage.setItem("docentes", JSON.stringify(docentes));
-}
-
-export { showVentanaTres };
+export { showVentanaCuatro };

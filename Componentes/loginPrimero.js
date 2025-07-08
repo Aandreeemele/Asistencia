@@ -1,55 +1,114 @@
 import { showVentanaSecundaria } from "./loginSecundario.js";
-import { showLogin } from "./login.js";
+import { showLogin } from "../login.js";
 import { showPrePrimaria } from "./preprimaria.js";
 import { showPrimaria } from "./primaria.js";
 import { showBasicos } from "./basicos.js";
-import { datosGrados, generarVistaGrado } from "./proyecciones.js"; // <- Corrección
+import { datosGrados, generarVistaGrado } from "./proyecciones.js";
+
+const accionesNivel = {
+  Preprimaria: showPrePrimaria,
+  Primaria: showPrimaria,
+  Basicos: showBasicos,
+  Bachillerato: showVentanaSecundaria
+};
 
 async function showPanel() {
-    try {
-        const response = await fetch("http://localhost:3000/grados");
-        if (!response.ok) throw new Error("Error al obtener los grados");
-        const grados = await response.json();
-        console.log("Grados recibidos:", grados);
+  try {
+    const response = await fetch("http://localhost:8000/niveles");
+    if (!response.ok) throw new Error("Error al obtener niveles académicos");
+    const niveles = await response.json();
 
-        const root = document.getElementById("root");
-        if (!root) throw new Error("Elemento root no encontrado");
+    console.log("🎯 Niveles recibidos:", niveles);
 
-        root.innerHTML = `  
-        <div class="panel-container">
-            <img src="fondo 3.svg" alt="" class="imgpanel">
-            <p class="Titulo01">𝙽𝚒𝚟𝚎𝚕𝚎𝚜</p>
-            <p class="Titulo02">𝙰𝚌𝚊𝚍é𝚖𝚒𝚌𝚘𝚜</p>
-            <button id="PrePrimaria">𝙿𝚛𝚎𝙿𝚛𝚒𝚖𝚊𝚛𝚒𝚊 </button>
-            <button id="PrimariaMayor">𝙿𝚛𝚒𝚖𝚊𝚛𝚒𝚊 </button>
-            <button id="Basicos">𝙱á𝚜𝚒𝚌𝚘𝚜</button>
-            <button id="Bachilleratos">𝙱𝚊𝚌𝚑𝚒𝚕𝚕𝚎𝚛𝚊𝚝𝚘𝚜</button>
-            <button id="Proyecciones">Proyecciones 📈</button>
-            <button id="cerrar">Cerrar sesión</button>
-            <button id="Siguiente">→</button>
-        </div>`;
+    document.body.innerHTML = "";
+    const root = document.createElement("div");
+    root.id = "root";
+    document.body.appendChild(root);
 
-        document.getElementById("Siguiente").addEventListener("click", showVentanaSecundaria);
-        document.getElementById("PrePrimaria").addEventListener("click", showPrePrimaria);
-        document.getElementById("PrimariaMayor").addEventListener("click", showPrimaria);
-        document.getElementById("Basicos").addEventListener("click", showBasicos);
-        document.getElementById("Bachilleratos").addEventListener("click", showVentanaSecundaria);
-        document.getElementById("Proyecciones").addEventListener("click", () => {
-            const root = document.getElementById("root");
-            root.innerHTML = ""; // limpia el contenido anterior
-            for (const [titulo, grados] of Object.entries(datosGrados)) {
-                generarVistaGrado(titulo, grados);
-            }
-        });
+    // Prueba visual: borde rojo para ver el contenedor root
+    root.style.border = "2px solid red";
 
-        document.getElementById("cerrar").addEventListener("click", () => {
-            localStorage.removeItem("user");
-            showLogin();
-        });
+    const panelContainer = document.createElement("div");
+    panelContainer.className = "panel-container";
 
-    } catch (error) {
-        console.error("Error en showPanel:", error);
-    }
+    const imagen = document.createElement("img");
+    imagen.src = "./assets/fondo 3.svg";
+    imagen.className = "imgpanel";
+
+    const titulo1 = document.createElement("p");
+    titulo1.className = "Titulo01";
+    titulo1.textContent = "𝙽𝚒𝚟𝚎𝚕𝚎𝚜";
+
+    const titulo2 = document.createElement("p");
+    titulo2.className = "Titulo02";
+    titulo2.textContent = "𝙰𝚌𝚊𝚍é𝚖𝚒𝚌𝚘𝚜";
+
+    panelContainer.appendChild(imagen);
+    panelContainer.appendChild(titulo1);
+    panelContainer.appendChild(titulo2);
+
+    // Generar botones dinámicos desde niveles
+    niveles.forEach(({ nivel }) => {
+      console.log("🟢 Creando botón para:", nivel); // PRUEBA
+
+      const btn = document.createElement("button");
+      btn.textContent = nivel;
+      btn.className = "boton-nivel";
+
+      // ESTILOS INLINE para descartar problema CSS
+      btn.style.padding = "10px";
+      btn.style.margin = "10px";
+      btn.style.fontSize = "16px";
+      btn.style.backgroundColor = "#4CAF50";
+      btn.style.color = "white";
+      btn.style.border = "none";
+      btn.style.borderRadius = "5px";
+      btn.style.cursor = "pointer";
+
+      btn.addEventListener("click", () => {
+        const accion = accionesNivel[nivel];
+        if (accion) {
+          accion();
+        } else {
+          alert(`No hay vista definida para el nivel: ${nivel}`);
+        }
+      });
+      panelContainer.appendChild(btn);
+      console.log("✅ Botón agregado para:", nivel); // PRUEBA
+    });
+
+    // Botón proyecciones
+    const btnProy = document.createElement("button");
+    btnProy.textContent = "Proyecciones 📈";
+    btnProy.addEventListener("click", () => {
+      root.innerHTML = "";
+      for (const [titulo, grados] of Object.entries(datosGrados)) {
+        generarVistaGrado(titulo, grados);
+      }
+    });
+    panelContainer.appendChild(btnProy);
+
+    // Botón cerrar sesión
+    const btnCerrar = document.createElement("button");
+    btnCerrar.textContent = "Cerrar sesión";
+    btnCerrar.addEventListener("click", () => {
+      localStorage.removeItem("user");
+      showLogin();
+    });
+    panelContainer.appendChild(btnCerrar);
+
+    // Botón siguiente
+    const btnSiguiente = document.createElement("button");
+    btnSiguiente.textContent = "→";
+    btnSiguiente.addEventListener("click", showVentanaSecundaria);
+    panelContainer.appendChild(btnSiguiente);
+
+    root.appendChild(panelContainer);
+    console.log("🧩 panelContainer agregado al DOM"); // PRUEBA
+
+  } catch (error) {
+    console.error("❌ Error en showPanel:", error);
+  }
 }
 
 export { showPanel };

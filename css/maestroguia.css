@@ -1,0 +1,16 @@
+
+#cerrar100{
+    width: 200px;
+    height: 40px;
+    font-size: 1rem;
+    border-radius: 25px;
+    border: 1px solid rgba(0, 0, 0, 0);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
+    position: relative;
+    top: 42rem;
+    left: -5rem;
+    background-color: rgba(11, 11, 78, 0.76);
+}

@@ -1,75 +1,161 @@
 import { registrarAlumnos } from "./registraralumnos.js";
-import { maestroGuia } from "./maestroGuia.js";
 import { showUniforme } from "./uniforme.js";
 import { showObservaciones } from "./observaciones.js";
+import { mostrarTablaAsistencias } from "./resumenAsistencia.js";
 
 function showopciones() {
-    const root = document.getElementById("root");
-    root.innerHTML = `
-        <div class="panel-container4">
-            <button id="Volvxr">←</button>
-            <button id="Siguientx1">→</button>
-            <div class="TitulodelDocente">Nombre Apellido</div>
-            <div class="Enero">𝙴𝚗𝚎𝚛𝚘
-                <button id="SCalendario">→</button>
-                <div class="Semana1">𝚂𝚎𝚖𝚊𝚗𝚊 1
-                    <div class="S1"></div>
-                    <div class="S2"></div>
-                    <div class="S3"></div>
-                    <div class="S4"></div>
-                    <div class="S5"></div>
-                </div>
-                <div class="Semana2">𝚂𝚎𝚖𝚊𝚗𝚊 2
-                    <div class="S01"></div>
-                    <div class="S02"></div>
-                    <div class="S03"></div>
-                    <div class="S04"></div>
-                    <div class="S05"></div>
-                </div>
-                <div class="Semana3">𝚂𝚎𝚖𝚊𝚗𝚊 3
-                    <div class="S001"></div>
-                    <div class="S002"></div>
-                    <div class="S003"></div>
-                    <div class="S004"></div>
-                    <div class="S005"></div>
-                </div>
-                <div class="Semana4">𝚂𝚎𝚖𝚊𝚗𝚊 4
-                    <div class="S0001"></div>
-                    <div class="S0002"></div>
-                    <div class="S0003"></div>
-                    <div class="S0004"></div>
-                    <div class="S0005"></div>
-                </div>
-            </div>
+  document.body.innerHTML = "";
+  const root = document.createElement("div");
+  root.id = "root";
+  document.body.appendChild(root);
 
-            <!-- Botones adicionales -->
-            <div class="botonesExtras">
-                <button id="btnUniforme">Uniforme Incompleto</button>
-                <button id="btnReporte">Enviar Reporte</button>
-                <button id="btnObservaciones">Observaciones</button>
-                <button id="btnActualizar">Actualizar</button>
-            </div>
-        </div>
-    `;
+  const contenedor = document.createElement("div");
+  contenedor.className = "panel-container4";
 
-    document.getElementById("Volvxr").addEventListener("click", registrarAlumnos);
-    document.getElementById("Siguientx1").addEventListener("click", maestroGuia);
+  const btnVolvxr = crearBoton("Volvxr", "←", registrarAlumnos, "btn-volver");
+  const btnSiguxxnte = crearBoton("Siguientx1", "→", mostrarTablaAsistencias, "btn-siguiente");
 
-    document.getElementById("btnUniforme").addEventListener("click", showUniforme);
 
-    document.getElementById("btnReporte").addEventListener("click", () => {
-        const destinatario = "aamelendez@scl.edu.gt";
-        const asunto = encodeURIComponent("Reporte de Asistencia");
-        const cuerpo = encodeURIComponent("Estimado encargado,\n\nAdjunto el reporte de asistencia del estudiante.\n\nSaludos cordiales.");
-        const url = `https://mail.google.com/mail/?view=cm&fs=1&to=${destinatario}&su=${asunto}&body=${cuerpo}`;
-        window.open(url, "_blank");
+  const tituloDocente = document.createElement("div");
+  tituloDocente.className = "TitulodelDocente";
+  tituloDocente.textContent = "𝙹𝚘𝚜𝚜𝚞𝚎 𝙵𝚞𝚎𝚗𝚝𝚎𝚜";
+
+  const contenedorMeses = document.createElement("div");
+  contenedorMeses.className = "contenedorMeses";
+
+  const meses = [
+    "Enero", "Febrero", "Marzo", "Abril",
+    "Mayo", "Junio", "Julio", "Agosto",
+    "Septiembre", "Octubre", "Noviembre", "Diciembre"
+  ];
+
+  // Estado global para asistencia { "mes-año": { dia: estado } }
+  let asistencia = cargarAsistencia();
+
+  meses.forEach((mes, index) => {
+    const divMes = document.createElement("div");
+    divMes.className = "mes";
+    
+    const tituloMes = document.createElement("strong");
+    tituloMes.textContent = mes;
+    divMes.appendChild(tituloMes);
+
+    // Crear calendario del mes actual (asumiendo año actual)
+    const añoActual = new Date().getFullYear();
+    const diasMes = new Date(añoActual, index + 1, 0).getDate();
+    const primerDiaSemana = new Date(añoActual, index, 1).getDay(); // 0-dom ... 6-sab
+    const offset = primerDiaSemana === 0 ? 6 : primerDiaSemana - 1; // lunes=0 para offset
+
+    // Grid para días de la semana
+    const gridDiasSemana = document.createElement("div");
+    gridDiasSemana.className = "dias-semana";
+    ["Lun", "Mar", "Mié", "Jue", "Vie", "Sáb", "Dom"].forEach(d => {
+      const dDiv = document.createElement("div");
+      dDiv.textContent = d;
+      gridDiasSemana.appendChild(dDiv);
     });
+    divMes.appendChild(gridDiasSemana);
 
-    document.getElementById("btnObservaciones").addEventListener("click", showObservaciones);
+    // Grid días mes
+    const gridDias = document.createElement("div");
+    gridDias.className = "dias-calendario";
 
-    document.getElementById("btnActualizar").addEventListener("click", () => {
-        alert("¡Actualizado correctamente!");
-    });
+    // Celdas vacías antes del primer día
+    for (let i = 0; i < offset; i++) {
+      const vacio = document.createElement("div");
+      vacio.className = "dia vacio";
+      gridDias.appendChild(vacio);
+    }
+
+    // Celdas con días del mes
+    for (let dia = 1; dia <= diasMes; dia++) {
+      const diaDiv = document.createElement("div");
+      diaDiv.className = "dia";
+
+      const numero = document.createElement("span");
+      numero.className = "numero-dia";
+      numero.textContent = dia;
+      diaDiv.appendChild(numero);
+
+      const marcador = document.createElement("div");
+      marcador.className = "marcador";
+
+      // Leer estado guardado para el día
+      const keyMes = `${mes}-${añoActual}`;
+      const estado = (asistencia[keyMes] && asistencia[keyMes][dia]) || "ninguno";
+      if (estado !== "ninguno") marcador.classList.add(estado);
+
+      diaDiv.appendChild(marcador);
+
+      // Evento click para alternar estado
+      diaDiv.addEventListener("click", () => {
+        let currentEstado = (asistencia[keyMes] && asistencia[keyMes][dia]) || "ninguno";
+        let nuevoEstado;
+        if (currentEstado === "ninguno") nuevoEstado = "asistio";
+        else if (currentEstado === "asistio") nuevoEstado = "falto";
+        else nuevoEstado = "ninguno";
+
+        if (!asistencia[keyMes]) asistencia[keyMes] = {};
+        if (nuevoEstado === "ninguno") delete asistencia[keyMes][dia];
+        else asistencia[keyMes][dia] = nuevoEstado;
+
+        guardarAsistencia(asistencia);
+        marcador.classList.remove("asistio", "falto");
+        if (nuevoEstado !== "ninguno") marcador.classList.add(nuevoEstado);
+      });
+
+      gridDias.appendChild(diaDiv);
+    }
+
+    divMes.appendChild(gridDias);
+    contenedorMeses.appendChild(divMes);
+  });
+
+  function crearBoton(id, texto, onClick, claseExtra = "") {
+    const boton = document.createElement("button");
+    boton.id = id;
+    boton.textContent = texto;
+    if (claseExtra) boton.className = claseExtra;
+    boton.addEventListener("click", onClick);
+    return boton;
+  }
+  
+  
+  const botonesExtras = document.createElement("div");
+  botonesExtras.className = "botonesExtras";
+
+  const btnUniforme = crearBoton("btnUniforme", "Uniforme Incompleto", showUniforme);
+
+  const btnReporte = crearBoton("btnReporte", "Enviar Reporte", () => {
+    const destinatario = "aamelendez@scl.edu.gt";
+    const asunto = encodeURIComponent("Reporte de Asistencia");
+    const cuerpo = encodeURIComponent("Estimado encargado,\n\nAdjunto el reporte de asistencia del estudiante.\n\nSaludos cordiales.");
+    const url = `https://mail.google.com/mail/?view=cm&fs=1&to=${destinatario}&su=${asunto}&body=${cuerpo}`;
+    window.open(url, "_blank");
+  });
+
+  const btnObservaciones = crearBoton("btnObservaciones", "Observaciones", showObservaciones);
+
+  const btnActualizar = crearBoton("btnActualizar", "Actualizar", () => {
+    alert("¡Actualizado correctamente!");
+  });
+
+  [btnUniforme, btnReporte, btnObservaciones, btnActualizar].forEach(btn => botonesExtras.appendChild(btn));
+
+  contenedor.appendChild(btnVolvxr);
+  contenedor.appendChild(btnSiguxxnte);
+  contenedor.appendChild(tituloDocente);
+  contenedor.appendChild(contenedorMeses);
+  contenedor.appendChild(botonesExtras);
+  root.appendChild(contenedor);
+}
+function guardarAsistencia(data) {
+  localStorage.setItem("asistencia", JSON.stringify(data));
+}
+
+function cargarAsistencia() {
+  const data = localStorage.getItem("asistencia");
+  return data ? JSON.parse(data) : {};
 }
 
 export { showopciones };

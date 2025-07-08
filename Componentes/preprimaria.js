@@ -1,90 +1,139 @@
 import { showPanel } from "./loginPrimero.js";
-function crearTarjetasDocentes(docentes = []) {
-    return docentes.map((docente, index) => `
-        <div class="card" data-index="${index}">
-            <h3 class="nombre-docente" >${docente.nombre}</h3>
-            <p class="descrip">${docente.descripcion}</p>
-            <button class="eliminar-docente">Eliminar</button>
-        </div>
-    `).join('');
+
+function crearTarjetasDocentes(docentes, contenedor, actualizar) {
+  contenedor.innerHTML = "";
+  docentes.forEach((docente, index) => {
+    const card = document.createElement("div");
+    card.className = "card";
+    card.dataset.index = index;
+
+    const nombre = document.createElement("h3");
+    nombre.className = "nombre-docente";
+    nombre.textContent = docente.nombre;
+
+    const descripcion = document.createElement("p");
+    descripcion.className = "descrip";
+    descripcion.textContent = docente.descripcion;
+
+    const btnEliminar = document.createElement("button");
+    btnEliminar.className = "eliminar-docente";
+    btnEliminar.textContent = "Eliminar";
+    btnEliminar.addEventListener("click", () => {
+      if (confirm("¿Deseas eliminar este docente?")) {
+        docentes.splice(index, 1);
+        localStorage.setItem("docentesPre", JSON.stringify(docentes));
+        actualizar();
+      }
+    });
+
+    card.appendChild(nombre);
+    card.appendChild(descripcion);
+    card.appendChild(btnEliminar);
+    contenedor.appendChild(card);
+  });
 }
 
 function showPrePrimaria() {
-    const root = document.getElementById("root");
-    let docentesGuardados = JSON.parse(localStorage.getItem("docentesPre")) || [
-        {
-            nombre: "Profesora Maria Pérez",
-            descripcion: "Encargada de Prekínder"
-        },
-        {
-            nombre: "Profesora Ana López",
-            descripcion: "Encargada de Kínder"
-        },
-        {
-            nombre: "Profesora Fernanda Ovalle",
-            descripcion: "Encargada de Preparatoria"
-        }
-    ];
+  document.body.innerHTML = "";
+  const root = document.createElement("div");
+  root.id = "root";
+  document.body.appendChild(root);
 
-    function renderizarDocentes() {
-        const listaDocentes = document.getElementById("listaDocentes");
-        listaDocentes.innerHTML = crearTarjetasDocentes(docentesGuardados);
+  let docentesGuardados = JSON.parse(localStorage.getItem("docentesPre")) || [
+    {
+      nombre: "Profesora Maria Pérez",
+      descripcion: "Encargada de Prekínder"
+    },
+    {
+      nombre: "Profesora Ana López",
+      descripcion: "Encargada de Kínder"
+    },
+    {
+      nombre: "Profesora Fernanda Ovalle",
+      descripcion: "Encargada de Preparatoria"
+    }
+  ];
 
-        // Agregar eventos de eliminación
-        document.querySelectorAll(".eliminar-docente").forEach((btn, index) => {
-            btn.addEventListener("click", () => {
-                if (confirm("¿Deseas eliminar este docente?")) {
-                    docentesGuardados.splice(index, 1);
-                    localStorage.setItem("docentesPre", JSON.stringify(docentesGuardados));
-                    renderizarDocentes();
-                }
-            });
-        });
+  const contenedor = document.createElement("div");
+  contenedor.className = "panel-container99";
+
+  const imgFondo = document.createElement("img");
+  imgFondo.src = "./assets/fondo 3.svg";
+  imgFondo.alt = "";
+  imgFondo.className = "imgfondo";
+
+  const btnVolver = crearBoton("Volver99", "←", showPanel);
+  const btnSiguiente = crearBoton("Siguiente99", "→", () => alert("Siguiente..."));
+
+  const titulo = document.createElement("p");
+  titulo.className = "Titulopre";
+  titulo.textContent = "𝙼𝙰𝙴𝚂𝚃𝚁𝙾𝚂";
+
+  const subtitulo = document.createElement("p");
+  subtitulo.className = "Titulopre1";
+  subtitulo.textContent = "𝙰𝚂𝙸𝙶𝙽𝙰𝙳𝙾𝚂";
+
+  const formNuevo = document.createElement("div");
+  formNuevo.className = "form-nuevo-docente";
+
+  const inputNombre = document.createElement("input");
+  inputNombre.id = "nombreDocente";
+  inputNombre.placeholder = "Nombre del docente";
+
+  const inputGrado = document.createElement("input");
+  inputGrado.id = "gradoDocente";
+  inputGrado.placeholder = "Grado o área asignada";
+
+  const btnAgregar = crearBoton("agregarNuevoDocentx", "Agregar Docente", () => {
+    const nombre = inputNombre.value.trim();
+    const grado = inputGrado.value.trim();
+
+    if (!nombre || !grado) {
+      alert("Por favor, completa ambos campos.");
+      return;
     }
 
-    root.innerHTML = `
-        <div class="panel-container99">
-            <img src="fondo 3.svg" alt="" class="imgfondo">
-            <button id="Volver99">←</button>
-            <button id="Siguiente99">→</button>
-            <p class="Titulopre">𝙼𝙰𝙴𝚂𝚃𝚁𝙾𝚂</p>
-            <p class="Titulopre1">𝙰𝚂𝙸𝙶𝙽𝙰𝙳𝙾𝚂</p>
-            <div class="form-nuevo-docente">
-                <input type="text" id="nombreDocente" placeholder="Nombre del docente">
-                <input type="text" id="gradoDocente" placeholder="Grado o área asignada">
-                <button id="agregarNuevoDocentx">Agregar Docente</button>
-            </div>
+    const nuevoDocente = {
+      nombre,
+      descripcion: `Encargada de ${grado}`
+    };
 
-            <div id="listaDocentes"></div>
-        </div>
-    `;
+    docentesGuardados.push(nuevoDocente);
+    localStorage.setItem("docentesPre", JSON.stringify(docentesGuardados));
+    renderizarDocentes();
+    inputNombre.value = "";
+    inputGrado.value = "";
+  });
 
-    document.getElementById("Volver99").addEventListener("click", showPanel);
-    const btnAgregar = document.getElementById("agregarNuevoDocentx");
+  const listaDocentes = document.createElement("div");
+  listaDocentes.id = "listaDocentes";
 
-    btnAgregar.addEventListener("click", () => {
-        const nombre = document.getElementById("nombreDocente").value.trim();
-        const grado = document.getElementById("gradoDocente").value.trim();
+  function renderizarDocentes() {
+    crearTarjetasDocentes(docentesGuardados, listaDocentes, renderizarDocentes);
+  }
 
-        if (nombre === "" || grado === "") {
-            alert("Por favor, completa ambos campos.");
-            return;
-        }
+  formNuevo.appendChild(inputNombre);
+  formNuevo.appendChild(inputGrado);
+  formNuevo.appendChild(btnAgregar);
 
-        const nuevoDocente = {
-            nombre,
-            descripcion: `Encargada de ${grado}`
-        };
+  contenedor.appendChild(imgFondo);
+  contenedor.appendChild(btnVolver);
+  contenedor.appendChild(btnSiguiente);
+  contenedor.appendChild(titulo);
+  contenedor.appendChild(subtitulo);
+  contenedor.appendChild(formNuevo);
+  contenedor.appendChild(listaDocentes);
+  root.appendChild(contenedor);
 
-        docentesGuardados.push(nuevoDocente);
-        localStorage.setItem("docentesPre", JSON.stringify(docentesGuardados));
-        renderizarDocentes();
+  renderizarDocentes();
+}
 
-        document.getElementById("nombreDocente").value = "";
-        document.getElementById("gradoDocente").value = "";
-    });
-
-    renderizarDocentes(); 
+function crearBoton(id, texto, onClick) {
+  const boton = document.createElement("button");
+  boton.id = id;
+  boton.textContent = texto;
+  boton.addEventListener("click", onClick);
+  return boton;
 }
 
 export { showPrePrimaria };

@@ -1,5 +1,5 @@
 import { showPanel } from "./loginPrimero.js";
-import { showVentanaTres } from "./loginTres.js";
+import { showopciones } from "./opciones.js";
 import { proyeccionxs, generarVistaGrado } from "./proyeciones1.js";
 
 // 🔧 Función reutilizable para mostrar las proyecciones
@@ -35,7 +35,7 @@ function showVentanaSecundaria() {
     contenedor.className = "panexl-containxr";
 
     const img = document.createElement("img");
-    img.src = "fondo 3.svg";
+    img.src = "./assest/fondo 3.svg";
     img.alt = "";
     img.className = "imgx1";
 
@@ -53,7 +53,7 @@ function showVentanaSecundaria() {
     const btnProyecciones = crearBoton("Proyecciones01", "Proyecciones 📈", mostrarProyecciones);
 
     // 👉 También puedes usar mostrarProyecciones para otros botones
-    const btnSiguiente = crearBoton("Siguiente999", "→", showVentanaTres);
+    const btnSiguiente = crearBoton("Siguiente999", "→", showopciones);
 
     const divisiones = [
         ["ivcompu", "𝙸𝚅 𝙲𝚘𝚖𝚙𝚞𝚝𝚊𝚌𝚒ó𝚗"],
@@ -78,7 +78,7 @@ function showVentanaSecundaria() {
 }
 
 // Para ejecutar inmediatamente showVentanaTres
-showVentanaTres();
+showopciones();
 
 // Exportar ventana secundaria
 export { showVentanaSecundaria };

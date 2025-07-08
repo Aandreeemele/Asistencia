@@ -1,0 +1,40 @@
+#btn-regresar-asistencia {
+    background-color: rgb(5, 5, 56);
+    color: white;
+    padding: 5px 10px;
+    border-radius: 8px;
+    border: none;
+    cursor: pointer;
+    position: relative;
+    top: 2rem;
+  }
+  
+  #btn-regresar-asistencia:hover {
+    background-color: rgb(6, 6, 92);
+  }
+  
+  #btn-siguiente-asistencia {
+    background-color: rgb(5, 5, 56);
+    color: white;
+    padding: 5px 10px;
+    border-radius: 8px;
+    border: none;
+    cursor: pointer;
+    position: relative;
+    top: 2rem;
+    left: 13.5rem;
+  }
+  
+  #btn-siguiente-asistencia:hover {
+    background-color: rgb(6, 6, 92);
+  }
+  #tablaAsistenciasContainer{
+    position: relative;
+    top: rem;
+  }
+
+  #titulo-resumen-asistencia {
+   position: relative;
+   left: -0.1rem;
+  }
+  

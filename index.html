@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="es">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -26,21 +26,22 @@
   <link rel="stylesheet" href="css/opciones.css" />
   <link rel="stylesheet" href="css/uniforme.css" />
   <link rel="stylesheet" href="css/observaciones.css" />
+  <link rel="stylesheet" href="css/registrar.css" />
+  <link rel="stylesheet" href="css/maestroguia.css">
+  <link rel="stylesheet" href="css/resumenAsistencia.css">
 </head>
 <body>
   <div id="z1k"></div>
   <main id="root"></main>
 
-  <script src="https://cdn.emailjs.com/sdk/3.9.0/email.min.js"></script>
-
+  <!-- EmailJS para correos -->
   <script>
     window.emailjsReady = false;
-  
     const script = document.createElement("script");
     script.src = "https://cdn.emailjs.com/sdk/3.9.0/email.min.js";
     script.onload = function () {
       if (window.emailjs) {
-        emailjs.init("g8rLoZ85GUVaJ6xRk"); // Usa tu user ID real
+        emailjs.init("g8rLoZ85GUVaJ6xRk"); // Tu ID real de EmailJS
         window.emailjsReady = true;
         console.log("✅ EmailJS cargado correctamente");
       } else {
@@ -49,9 +50,12 @@
     };
     document.head.appendChild(script);
   </script>
-  
 
-  <!-- Tu script principal -->
-  <script src="script.js" type="module"></script>
+  <!-- jsPDF para exportar PDF -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
+
+
+  <!-- Tu script principal con módulos -->
+  <script src="login.js" type="module"></script>
 </body>
 </html>

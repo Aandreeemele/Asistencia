@@ -1,5 +1,5 @@
 import { showVentanaSecundaria } from "./loginSecundario.js";
-import { showVentanaTres } from "./loginTres.js";
+import { showopciones } from "./opciones.js";
 const proyeccionxs = {
   "Bachilleratos": [
     { nombre: 'IV Computación', color: 'azul' },
@@ -30,7 +30,7 @@ function generarVistaGrado(nombreGrupo, listaGrados) {
   const btnRegresar = document.createElement('button');
   btnRegresar.textContent = "→";
   btnRegresar.className = "btn-regresar";
-  btnRegresar.addEventListener("click", showVentanaTres, () => {
+  btnRegresar.addEventListener("click", showopciones, () => {
     window.history.back(); // o cambiar por otra función si tienes controladores de navegación
   });
 
