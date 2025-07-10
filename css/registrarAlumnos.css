@@ -1,5 +1,5 @@
 /* Contenedor principal */
-.panxxlcontainer {
+.contenedorPrincipal {
     max-width: 400px;
     height: 800px;
     display: grid;
@@ -34,7 +34,7 @@
 
 /* Título y subtítulo */
 .titPrincipal {
-    font-size: 1.8rem;
+    font-size: 1.5rem;
     font-weight: bold;
     color: #002f6c;
     grid-column: 4;
@@ -186,3 +186,6 @@
     left: -8.5rem;
     top: 0.5rem;
 }
+
+
+

@@ -5,14 +5,12 @@ async function mostrarTablaAsistencias() {
   const root = document.getElementById("root");
   root.innerHTML = ""; // Limpiar todo antes de mostrar
 
-  // 🔵 Título principal
   const titulo = document.createElement("h2");
   titulo.id = "titulo-resumen-asistencia";
   titulo.textContent = "𝚁𝚎𝚜𝚞𝚖𝚎𝚗 𝙰𝚜𝚒𝚜𝚝𝚎𝚗𝚌𝚒𝚊";
   titulo.style.textAlign = "center";
   root.appendChild(titulo);
 
-  // Crear contenedor principal
   const tablaContainer = document.createElement("div");
   tablaContainer.id = "tablaAsistenciasContainer";
 
@@ -26,7 +24,9 @@ async function mostrarTablaAsistencias() {
   wrapper.style.background = "white";
 
   try {
-    const res = await fetch("	https://asisten.proyecttoscl.space/alumnos");
+    const res = await fetch("https://asistent.proyectoscl.space/alumnos");
+    if (!res.ok) throw new Error(`Error HTTP: ${res.status}`);
+
     const alumnos = await res.json();
 
     if (!alumnos.length) {
@@ -97,28 +97,35 @@ async function mostrarTablaAsistencias() {
     tablaContainer.appendChild(wrapper);
     root.appendChild(tablaContainer);
 
-    // 🔵 Botones
+    // Botones navegación
     const navBotones = document.createElement("div");
 
     const btnVolver = document.createElement("button");
     btnVolver.id = "btn-regresar-asistencia";
     btnVolver.textContent = "← Regresar";
-    btnVolver.onclick = showopciones;
+    navBotones.appendChild(btnVolver);
 
     const btnSiguiente = document.createElement("button");
     btnSiguiente.id = "btn-siguiente-asistencia";
     btnSiguiente.textContent = "Siguiente →";
-    btnSiguiente.onclick = () => {
-      root.innerHTML = "";
-      maestroGuia();
-    };
-
-    navBotones.appendChild(btnVolver);
     navBotones.appendChild(btnSiguiente);
+
     root.appendChild(navBotones);
 
-  } catch (err) {
-    console.error("❌ Error:", err);
+    // Event listeners, solo si existen botones (creados aquí mismo)
+    btnVolver.addEventListener("click", () => {
+      console.log("← Botón Regresar presionado");
+      showopciones();
+    });
+
+    btnSiguiente.addEventListener("click", () => {
+      console.log("→ Botón Siguiente presionado");
+      root.innerHTML = "";
+      maestroGuia();
+    });
+
+  } catch (error) {
+    console.error("❌ Error al cargar asistencias:", error);
     tablaContainer.textContent = "Error al cargar asistencias.";
     root.appendChild(tablaContainer);
   }

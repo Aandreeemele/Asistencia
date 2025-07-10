@@ -20,6 +20,7 @@ document.addEventListener("DOMContentLoaded", () => {
   }
 
   showLogin();
+  manejarBotonesNavegacion(); 
 });
 
 function showLogin() {
@@ -90,6 +91,7 @@ function showLogin() {
 
   root.appendChild(loginDiv);
 
+  // Eventos
   btnContraOlvido.addEventListener("click", () => {
     showRecuperarContra();
   });
@@ -103,13 +105,13 @@ function showLogin() {
     e.preventDefault();
 
     const correo = inputCorreo.value.trim();
-    const contrasena = inputContrasena.value; 
+    const contrasena = inputContrasena.value;
 
     try {
       const res = await fetch(`${BASE_URL}/login`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ correo, contrasena }) 
+        body: JSON.stringify({ correo, contrasena })
       });
 
       if (!res.ok) {
@@ -118,7 +120,7 @@ function showLogin() {
 
       const usuario = await res.json();
       alert("Inicio de sesión exitoso");
-      usuario.contraseña = contrasena; 
+      usuario.contraseña = contrasena;
       localStorage.setItem("user", JSON.stringify(usuario));
 
       mostrarPanel();
@@ -129,7 +131,7 @@ function showLogin() {
   });
 }
 
-
+// Lógica para mostrar el panel según el rol
 function mostrarPanel() {
   const user = JSON.parse(localStorage.getItem("user"));
   const rol = user?.rol;
@@ -148,13 +150,41 @@ function mostrarPanel() {
 
     case "admin":
       console.log("🔵 Mostrando panel para Admin");
-      showPanel(); // puedes cambiarlo luego
+      showPanel(); // Puedes reemplazar luego con panel de admin si tienes uno
       break;
 
     default:
       console.log("⚪ Usuario sin rol específico");
       showPanel();
       break;
+  }
+}
+
+// Asignación de botones si están presentes en el DOM
+function manejarBotonesNavegacion() {
+  const btnVolver = document.getElementById("btnVolver");
+  const btnSiguiente = document.getElementById("btnSiguiente");
+  const btnAgregarAlumno = document.getElementById("btnAgregarAlumno");
+
+  if (btnVolver) {
+    btnVolver.addEventListener("click", () => {
+      console.log("🔙 Botón VOLVER presionado");
+      showLogin();
+    });
+  }
+
+  if (btnSiguiente) {
+    btnSiguiente.addEventListener("click", () => {
+      console.log("➡️ Botón SIGUIENTE presionado");
+      // Acción futura
+    });
+  }
+
+  if (btnAgregarAlumno) {
+    btnAgregarAlumno.addEventListener("click", () => {
+      console.log("➕ Botón AGREGAR ALUMNO presionado");
+      // Acción futura
+    });
   }
 }
 
