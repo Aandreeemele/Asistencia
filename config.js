@@ -1,1 +1,1 @@
-export const BASE_URL="https://asistent.proyectoscl.space/niveles"
+export const BASE_URL="https://asistent.proyectoscl.space"
