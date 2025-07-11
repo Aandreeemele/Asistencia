@@ -59,20 +59,20 @@
   left: -0.1rem;
 }
 .btn-regresar-asistencia{
-  background-color: white;
-  border: 1px solid white;
+  background-color: rgba(255, 255, 255, 0);
+  border: 1px solid rgba(255, 255, 255, 0);
   font-size: 3rem;
   position: relative;
   left: -9.2rem;
-  top: -49rem;
+  top: -51rem;
   cursor: pointer;
 }
 .btn-siguiente-asistencia{
-  background-color: white;
-  border: 1px solid white;
+  background-color: rgba(255, 255, 255, 0);
+  border: 1px solid rgba(255, 255, 255, 0);
   font-size: 3rem;
   position: relative;
   left: 9rem;
-  top: -49rem;
+  top: -51rem;
   cursor: pointer;
 }

@@ -11,6 +11,9 @@ async function registrarAlumnos() {
   const contenedor = crearContenedorPrincipal();
   root.appendChild(contenedor);
 
+  // Espera a que los botones existan en el DOM
+  await new Promise(resolve => setTimeout(resolve, 50));
+
   const btnVolver = document.getElementById("btnVolver");
   const btnSiguiente = document.getElementById("btnSiguiente");
   const btnMarcarTodos = document.getElementById("btnMarcarTodos");
@@ -26,7 +29,6 @@ async function registrarAlumnos() {
   let alumnos = await cargarAlumnosDesdeDB();
   let alumnoIdAEliminar = null;
 
-  // Crear el elemento alumno con botones y eventos
   function crearElementoAlumno(alumno, contenedorAlumnos, modal, setIdEliminar) {
     const card = document.createElement("div");
     card.className = "alumno-card";
@@ -36,7 +38,6 @@ async function registrarAlumnos() {
     nombre.textContent = alumno.nombre;
     card.appendChild(nombre);
 
-    // Botón Asistió
     const btnAsistio = document.createElement("button");
     btnAsistio.className = "btn-asistio";
     btnAsistio.textContent = "✓";
@@ -49,7 +50,6 @@ async function registrarAlumnos() {
     });
     card.appendChild(btnAsistio);
 
-    // Botón No Asistió
     const btnNoAsistio = document.createElement("button");
     btnNoAsistio.className = "btn-no-asistio";
     btnNoAsistio.textContent = "✗";
@@ -62,7 +62,6 @@ async function registrarAlumnos() {
     });
     card.appendChild(btnNoAsistio);
 
-    // Botón Eliminar
     const btnEliminar = document.createElement("button");
     btnEliminar.className = "btn-eliminar";
     btnEliminar.textContent = "Eliminar";
@@ -80,30 +79,27 @@ async function registrarAlumnos() {
     crearElementoAlumno(alumno, contenedorAlumnos, modal, setIdEliminar);
   });
 
-  btnVolver?.addEventListener("click", zz7);
-  btnSiguiente?.addEventListener("click", showopciones);
-
-  btnCancelar?.addEventListener("click", () => {
+  if (btnVolver) btnVolver.addEventListener("click", zz7);
+  if (btnSiguiente) btnSiguiente.addEventListener("click", showopciones);
+  if (btnCancelar) btnCancelar.addEventListener("click", () => {
     modal.style.display = "none";
     alumnoIdAEliminar = null;
   });
 
-  btnConfirmar?.addEventListener("click", async () => {
+  if (btnConfirmar) btnConfirmar.addEventListener("click", async () => {
     if (alumnoIdAEliminar !== null) {
       await eliminarAlumnoDB(alumnoIdAEliminar);
       modal.style.display = "none";
       alumnoIdAEliminar = null;
-      registrarAlumnos();
+      registrarAlumnos(); // Refresca
     }
   });
 
-  btnAgregar?.addEventListener("click", async () => {
+  if (btnAgregar) btnAgregar.addEventListener("click", async () => {
     const nombre = prompt("Nombre del alumno:");
     if (!nombre) return alert("El nombre es obligatorio.");
-
     const grado = prompt("Grado del alumno:");
     if (!grado) return alert("El grado es obligatorio.");
-
     const correo = prompt("Correo del alumno (opcional):") || "";
     const telefono = prompt("Teléfono del alumno (opcional):") || "";
 
@@ -123,7 +119,7 @@ async function registrarAlumnos() {
     }
   });
 
-  btnMarcarTodos?.addEventListener("click", () => {
+  if (btnMarcarTodos) btnMarcarTodos.addEventListener("click", () => {
     const allBtnAsistio = contenedorAlumnos.querySelectorAll(".btn-asistio");
     const allBtnNoAsistio = contenedorAlumnos.querySelectorAll(".btn-no-asistio");
     allBtnAsistio.forEach((btn) => (btn.style.backgroundColor = "green"));
@@ -131,7 +127,7 @@ async function registrarAlumnos() {
     alumnos.forEach((a) => guardarEstadoAsistencia(a.id, "asistio"));
   });
 
-  btnMarcarTodosAusentes?.addEventListener("click", () => {
+  if (btnMarcarTodosAusentes) btnMarcarTodosAusentes.addEventListener("click", () => {
     const allBtnNoAsistio = contenedorAlumnos.querySelectorAll(".btn-no-asistio");
     const allBtnAsistio = contenedorAlumnos.querySelectorAll(".btn-asistio");
     allBtnNoAsistio.forEach((btn) => (btn.style.backgroundColor = "red"));
@@ -139,28 +135,28 @@ async function registrarAlumnos() {
     alumnos.forEach((a) => guardarEstadoAsistencia(a.id, "noasistio"));
   });
 
-  btnEnviarCorreos?.addEventListener("click", () => {
+  if (btnEnviarCorreos) btnEnviarCorreos.addEventListener("click", () => {
     const correos = alumnos.map((a) => a.correo).filter((c) => c);
     if (correos.length === 0) return alert("No hay correos disponibles para enviar.");
     alert(`Se enviarían correos a:\n\n${correos.join(", ")}`);
   });
 
-  btnMarcarTarde?.addEventListener("click", () => {
+  if (btnMarcarTarde) btnMarcarTarde.addEventListener("click", () => {
     alert("Selecciona al alumno que llegó tarde haciendo click en su botón ✓");
-
     const allBtnAsistio = contenedorAlumnos.querySelectorAll(".btn-asistio");
     allBtnAsistio.forEach((btn) => {
       const handler = () => {
         allBtnAsistio.forEach((b) => {
-          if (b !== btn) b.style.backgroundColor = "green";
+          const idB = b.closest(".alumno-card").dataset.id;
+          if (b !== btn) {
+            b.style.backgroundColor = "green";
+            guardarEstadoAsistencia(idB, "asistio");
+          }
         });
         btn.style.backgroundColor = "orange";
-
         const idAlumno = btn.closest(".alumno-card").dataset.id;
         guardarEstadoAsistencia(idAlumno, "tarde");
-
         allBtnAsistio.forEach((b) => b.removeEventListener("click", handler));
-
         alert("Alumno marcado como llegó tarde.");
       };
       btn.addEventListener("click", handler);
@@ -179,13 +175,10 @@ async function guardarEstadoAsistencia(idAlumno, estado) {
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({ estado }),
     });
-
     if (!response.ok) throw new Error("No se pudo actualizar asistencia");
-
     const tiempoExpira = Date.now() + 12 * 60 * 60 * 1000;
     const estadoAsistencia = { estado, expira: tiempoExpira };
     localStorage.setItem(`asistencia-${idAlumno}`, JSON.stringify(estadoAsistencia));
-
     mostrarTablaAsistencias();
   } catch (error) {
     console.error("❌ Error al guardar asistencia:", error);

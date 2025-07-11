@@ -71,7 +71,6 @@ function zz7() {
   btnDescargar.style.cursor = "pointer";
 
   btnDescargar.addEventListener("click", () => {
-    // Usa html2pdf para generar el PDF del contenedor
     if (typeof html2pdf === "undefined") {
       alert("Error: La librería html2pdf.js no está cargada");
       return;
@@ -88,35 +87,27 @@ function zz7() {
   root.appendChild(btnDescargar);
 
   // Botones de navegación
-  // Botones de navegación
-const nav = document.createElement("div");
-nav.className = "nav-buttons";
-nav.style.textAlign = "center";
-nav.style.marginTop = "10px";
+  const nav = document.createElement("div");
+  nav.className = "nav-buttons";
+  nav.style.textAlign = "center";
+  nav.style.marginTop = "10px";
 
-// Botón "Regresar" con nombre único y clase
-const btnRegresarAsistencia = document.createElement("button");
-btnRegresarAsistencia.textContent = "←";
-btnRegresarAsistencia.className = "btn-regresar-asistencia";
-btnRegresarAsistencia.style.borderRadius = "6px";
-btnRegresarAsistencia.style.cursor = "pointer";
-btnRegresarAsistencia.addEventListener("click", maestroGuia);
+  const btnRegresarAsistencia = document.createElement("button");
+  btnRegresarAsistencia.textContent = "←";
+  btnRegresarAsistencia.className = "btn-regresar-asistencia";
+  btnRegresarAsistencia.style.borderRadius = "6px";
+  btnRegresarAsistencia.style.cursor = "pointer";
+  btnRegresarAsistencia.addEventListener("click", maestroGuia);
 
-// Botón "Siguiente" con nombre único y clase
-const btnSiguienteAsistencia = document.createElement("button");
-btnSiguienteAsistencia.textContent = "→";
-btnSiguienteAsistencia.className = "btn-siguiente-asistencia";
-btnSiguienteAsistencia.style.borderRadius = "6px";
-btnSiguienteAsistencia.style.cursor = "pointer";
-btnSiguienteAsistencia.addEventListener("click", registrarAlumnos);
+  const btnSiguienteAsistencia = document.createElement("button");
+  btnSiguienteAsistencia.textContent = "→";
+  btnSiguienteAsistencia.className = "btn-siguiente-asistencia";
+  btnSiguienteAsistencia.style.borderRadius = "6px";
+  btnSiguienteAsistencia.style.cursor = "pointer";
+  btnSiguienteAsistencia.addEventListener("click", registrarAlumnos);
 
-nav.appendChild(btnRegresarAsistencia);
-nav.appendChild(btnSiguienteAsistencia);
-
-root.appendChild(nav);
-
-  nav.appendChild(btnVolver);
-  nav.appendChild(btnSiguiente);
+  nav.appendChild(btnRegresarAsistencia);
+  nav.appendChild(btnSiguienteAsistencia);
 
   root.appendChild(nav);
 }
