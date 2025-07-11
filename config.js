@@ -1,1 +1,1 @@
-export const BASE_URL="https://asistencia-w7of.onrender.com"
+export const BASE_URL="https://asistent.proyectoscl.space/niveles"
