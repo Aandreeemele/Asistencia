@@ -197,8 +197,9 @@
     position: relative;
     top: -2.5rem;
     left: 6rem;
-    width: 3.5rem;
-    height: 2rem;
+    width: 4rem;
+    height: 2.5rem;
+    font-size: 1rem;
     border-radius: 20px;
 }
 .btn-no-asistio{
@@ -206,9 +207,9 @@
     top: -4rem;
     left: 10rem;
     width: 4rem;
-    height: 2rem;
+    height: 2.5rem;
     border-radius: 20px;
-    font-size: 1.1rem;
+    font-size: 1rem;
 }
 .btn-eliminar{
     position: relative;
