@@ -1,5 +1,6 @@
 import { showLogin } from "../login.js";
 import { BASE_URL } from "../config.js";
+
 function showRecuperarContra() {
   document.body.innerHTML = "";
   const root = document.createElement("div");
@@ -26,9 +27,10 @@ function showRecuperarContra() {
   const fase2 = crearElemento("div");
   fase2.id = "fase2";
   fase2.style.display = "none";
-  const p2 = crearElemento("p", "", "Hemos enviado un código: ");
+  const p2 = crearElemento("p", "", "Hemos enviado un código a tu correo:");
   const strong = document.createElement("strong");
   strong.id = "codigoGenerado";
+  strong.textContent = "Revisa tu bandeja de entrada";
   p2.appendChild(strong);
   const inputCodigo = crearInput("codigoIngresado", "Ingresa el código");
   const btnVerificar = crearBoton("verificarCodigo", "Verificar");
@@ -50,16 +52,32 @@ function showRecuperarContra() {
   // Lógica
   let codigoReal = "";
 
-  btnCodigo.addEventListener("click", () => {
+  btnCodigo.addEventListener("click", async () => {
     const user = inputCorreo.value.trim();
     if (!user) return alert("Ingresa un correo válido.");
 
     codigoReal = Math.floor(100000 + Math.random() * 900000).toString();
-    strong.textContent = codigoReal;
 
-    alert("Tu código es: " + codigoReal);
-    fase1.style.display = "none";
-    fase2.style.display = "block";
+    try {
+      const res = await fetch(`${BASE_URL}/enviar-codigo`, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          correo: user,
+          codigo: codigoReal
+        })
+      });
+
+      if (!res.ok) {
+        return alert("❌ Error al enviar el código por correo.");
+      }
+
+      fase1.style.display = "none";
+      fase2.style.display = "block";
+    } catch (err) {
+      console.error(err);
+      alert("❌ Error de red al enviar código.");
+    }
   });
 
   btnVerificar.addEventListener("click", () => {

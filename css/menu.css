@@ -1,0 +1,73 @@
+.menu-content{
+    width: 250px;
+    height: 830px;
+    border: 1px solid black;
+    position: relative;
+    top: -53rem;
+    left: 35.5rem;
+    background-color: white;
+
+    display: grid;
+    grid-template-rows: repeat(15,1fr);
+}
+.wq0{
+    grid-row: 1;
+    font-size: 1.2rem;
+    position: relative;
+    left: 2rem;
+}
+.wq1{
+    grid-row: 2;
+    font-size: 1rem;
+    position: relative;
+    left: 6.5rem;
+    top: -2.2rem;
+}
+#btnReporte{
+    width: 200px;
+    height: 35px;
+    border-radius: 15px;
+    border: 1px solid rgb(5, 5, 69);
+    background-color: rgb(5, 5, 69);
+    color: white;
+    grid-row: 3;
+    position: relative;
+    left: 1.5rem;
+    top: -1em;
+}
+#btnUniforme{
+    width: 200px;
+    height: 35px;
+    border-radius: 15px;
+    border: 1px solid rgb(5, 5, 69);
+    background-color: rgb(5, 5, 69);
+    color: white;
+    grid-row: 4;
+    position: relative;
+    left: 1.5rem;
+    top: -1em;
+}
+#btnProye{
+    width: 200px;
+    height: 35px;
+    border-radius: 15px;
+    border: 1px solid rgb(5, 5, 69);
+    background-color: rgb(5, 5, 69);
+    color: white;
+    grid-row: 5;
+    position: relative;
+    left: 1.5rem;
+    top: -1em;
+}
+#btnCerrarS{
+    width: 200px;
+    height: 35px;
+    border-radius: 15px;
+    border: 1px solid rgb(5, 5, 69);
+    background-color: rgb(5, 5, 69);
+    color: white;
+    grid-row: 6;
+    position: relative;
+    left: 1.5rem;
+    top: -1em;
+}

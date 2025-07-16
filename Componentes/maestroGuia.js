@@ -1,6 +1,6 @@
-import { mostrarTablaAsistencias } from "./resumenAsistencia.js";
+import { crearMenu } from "./menu.js";
 import { showLogin } from "../login.js";
-import { zz7 } from "./graficaAsistencia.js";
+import { registrarAlumnos } from "./registraralumnos.js";
 
 function maestroGuia() {
   let root = document.getElementById("root");
@@ -28,9 +28,36 @@ function maestroGuia() {
   titulo2.className = "Titulx0022";
   titulo2.textContent = "𝙶𝚄𝙸𝙰";
 
-  const btnVolver = crearBoton("Volver999", "←", mostrarTablaAsistencias);
-  const btnSiguiente = crearBoton("Siguiente999", "→", zz7);
-
+  const btnMenu = crearBoton("btnMenu", "☰", () => {
+    const menuExistente = document.getElementById("menuDesplegable");
+  
+    if (menuExistente) {
+      menuExistente.remove();
+      document.removeEventListener("click", handleOutsideClick);
+    } else {
+      const menu = crearMenu();
+      document.body.appendChild(menu);
+  
+      // Esperar un microtiempo para evitar que el mismo clic lo cierre instantáneamente
+      setTimeout(() => {
+        document.addEventListener("click", handleOutsideClick);
+      }, 50);
+    }
+  
+    function handleOutsideClick(e) {
+      const menu = document.getElementById("menuDesplegable");
+      const esClickDentroDelMenu = menu && menu.contains(e.target);
+      const esClickEnBotonMenu = btnMenu.contains(e.target);
+  
+      if (!esClickDentroDelMenu && !esClickEnBotonMenu) {
+        menu.remove();
+        document.removeEventListener("click", handleOutsideClick);
+      }
+    }
+  });
+  
+  
+  
   const btnCerrar = crearBoton("cerrar100", "Cerrar Sesión", () => {
     localStorage.removeItem("user");
     root.innerHTML = "";
@@ -38,12 +65,17 @@ function maestroGuia() {
   });
 
   const compuDiv = document.createElement("div");
-  compuDiv.className = "ivcompu";
-  compuDiv.textContent = "𝚅 𝙲𝚘𝚖𝚙𝚞𝚝𝚊𝚌𝚒ó𝚗";
+compuDiv.className = "ivcompu";
+compuDiv.textContent = "𝚅 𝙲𝚘𝚖𝚙𝚞𝚝𝚊𝚌𝚒ó𝚗";
+
+compuDiv.addEventListener("click", () => {
+  root.innerHTML = "";
+  registrarAlumnos();
+});
+
 
   container.appendChild(fondo);
-  container.appendChild(btnVolver);
-  container.appendChild(btnSiguiente);
+  container.appendChild(btnMenu);
   container.appendChild(titulo1);
   container.appendChild(titulo2);
   container.appendChild(compuDiv);
