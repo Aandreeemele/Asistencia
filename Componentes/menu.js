@@ -1,6 +1,7 @@
 import { showLogin } from "../login.js";
 import { showUniforme } from "./uniforme.js";
 import { mostrarPanelAcademico } from "./otrosNiveles.js";
+
 function crearMenu() {
   const contenedor = document.createElement("div");
   contenedor.id = "menuDesplegable";
@@ -19,46 +20,67 @@ function crearMenu() {
 
   const btnReporte = crearBoton("btnReporte", "Reporte");
   const btnUniforme = crearBoton("btnUniforme", "Uniforme");
-  const btnProye = crearBoton("btnProye", "proyecciones");
-  const btnOtrosNivels = crearBoton("btnOtrosNiveles", "Otros Niveles");
-  const btnCerrarS = crearBoton("btnCerrarS", "Cerra Seción");
+  const btnProye = crearBoton("btnProye", "Proyecciones");
+  const btnOtrosNiveles = crearBoton("btnOtrosNiveles", "Otros Niveles");
+  const btnCerrarS = crearBoton("btnCerrarS", "Cerrar Sesión");
 
-  // Evento para cerrar sesión
-  btnCerrarS.addEventListener("click", () => {
+  function cerrarMenu() {
     const menu = document.getElementById("menuDesplegable");
     if (menu) menu.remove();
+    // Quitar también el listener global cuando cerramos menú
+    document.removeEventListener("click", clickFueraDelMenu);
+  }
+
+  // Detecta clic fuera del menú para cerrarlo
+  function clickFueraDelMenu(event) {
+    const menu = document.getElementById("menuDesplegable");
+    if (menu && !menu.contains(event.target)) {
+      cerrarMenu();
+    }
+  }
+
+  // Agregar listener global para detectar clic fuera
+  setTimeout(() => {
+    // Se usa setTimeout para que el click que abrió el menú no cierre inmediatamente
+    document.addEventListener("click", clickFueraDelMenu);
+  }, 0);
+
+  // Eventos botones:
+  btnCerrarS.addEventListener("click", () => {
+    cerrarMenu();
     showLogin();
   });
 
-  // Evento para mostrar Uniforme
   btnUniforme.addEventListener("click", () => {
+    cerrarMenu();
     showUniforme();
   });
 
-  // Evento para otros niveles
-  btnOtrosNivels.addEventListener("click", () =>{
+  btnOtrosNiveles.addEventListener("click", () => {
+    cerrarMenu();
     mostrarPanelAcademico();
   });
 
-  // Evento para enviar correo desde Gmail
   btnReporte.addEventListener("click", () => {
+    cerrarMenu();
+
     const destinatario = "aamelendez@scl.edu.gt";
     const asunto = encodeURIComponent("Reporte Colegio General");
     const cuerpo = encodeURIComponent("Colegio General le informa sobre el reporte, generado desde la plataforma del colegio.");
 
-    // Abrir Gmail en una nueva pestaña
     window.open(`https://mail.google.com/mail/?view=cm&fs=1&to=${destinatario}&su=${asunto}&body=${cuerpo}`, '_blank');
 
-    // Simular volver a la app después de unos segundos
     setTimeout(() => {
       alert("Gracias por enviar tu reporte.");
-      const menu = document.getElementById("menuDesplegable");
-      if (menu) menu.remove();
-      document.body.appendChild(crearMenu());
     }, 4000);
   });
 
-  menuContent.append(titulo1, titulo2, btnReporte, btnUniforme, btnProye, btnOtrosNivels, btnCerrarS);
+  btnProye.addEventListener("click", () => {
+    cerrarMenu();
+    alert("Aquí va la función de proyecciones.");
+  });
+
+  menuContent.append(titulo1, titulo2, btnReporte, btnUniforme, btnProye, btnOtrosNiveles, btnCerrarS);
   contenedor.appendChild(menuContent);
 
   return contenedor;
@@ -72,3 +94,4 @@ function crearBoton(id, texto) {
 }
 
 export { crearMenu };
+
