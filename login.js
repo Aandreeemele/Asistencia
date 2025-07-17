@@ -103,64 +103,70 @@ function showLogin() {
 
   form.addEventListener("submit", async (e) => {
     e.preventDefault();
-
+  
     const correo = inputCorreo.value.trim();
     const contrasena = inputContrasena.value;
-
+  
     try {
       const res = await fetch(`${BASE_URL}/login`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ correo, contrasena })
+        body: JSON.stringify({ correo, contrasena }),
       });
-
+  
       if (!res.ok) {
         throw new Error("Credenciales incorrectas");
       }
-
+  
       const usuario = await res.json();
+      console.log("Usuario recibido:", usuario);
+  
+      // Preparar objeto con datos correctos
+      const datosUsuario = {
+        correo: usuario.correo,
+        nombre: usuario.nombre,
+        apellido: usuario.apellido,
+        rol: usuario.rol,
+        gradoAsignado: usuario.gradoAsignado || "",  // <-- aquí
+        contraseña: contrasena
+      };
+  
       alert("Inicio de sesión exitoso");
-      usuario.contraseña = contrasena;
-      localStorage.setItem("user", JSON.stringify(usuario));
-
+      localStorage.setItem("user", JSON.stringify(datosUsuario));
+  
       mostrarPanel();
-
+  
     } catch (error) {
       alert("Credenciales incorrectas o usuario no existe");
     }
   });
+  
 }
 
-// Lógica para mostrar el panel según el rol
 function mostrarPanel() {
   const user = JSON.parse(localStorage.getItem("user"));
   const rol = user?.rol;
   console.log("Rol del usuario:", rol);
+  console.log("Datos del usuario:", user);
 
   switch (rol) {
     case "coordinador":
-      console.log("🟢 Mostrando panel para Coordinador");
       showPanel();
       break;
-
     case "maestro":
-      console.log("🟡 Mostrando panel para Maestro");
-      maestroGuia();
+      console.log("Correo:", user.correo, "Grado asignado:", user.gradoAsignado);
+      maestroGuia(user.correo, user.gradoAsignado);
       break;
-
     case "admin":
-      console.log("🔵 Mostrando panel para Admin");
-      showPanel(); // Puedes reemplazar luego con panel de admin si tienes uno
+      showPanel();
       break;
-
     default:
-      console.log("⚪ Usuario sin rol específico");
       showPanel();
       break;
   }
 }
 
-// Asignación de botones si están presentes en el DOM
+
 function manejarBotonesNavegacion() {
   const btnVolver = document.getElementById("btnVolver");
   const btnSiguiente = document.getElementById("btnSiguiente");
@@ -176,14 +182,12 @@ function manejarBotonesNavegacion() {
   if (btnSiguiente) {
     btnSiguiente.addEventListener("click", () => {
       console.log("➡️ Botón SIGUIENTE presionado");
-      // Acción futura
     });
   }
 
   if (btnAgregarAlumno) {
     btnAgregarAlumno.addEventListener("click", () => {
       console.log("➕ Botón AGREGAR ALUMNO presionado");
-      // Acción futura
     });
   }
 }

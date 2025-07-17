@@ -1,131 +1,115 @@
 import { showopciones } from "./opciones.js";
+import { maestroGuia } from "./maestroGuia.js";
 
 function showUniforme() {
-  const root = document.getElementById("root");
-  root.innerHTML = "";
+  const root = document.createElement("div");
+  root.id = "root";
 
-  // Botón volver
-  const volverBtn = document.createElement("button");
-  volverBtn.textContent = "←";
-  volverBtn.id = "Volvxr";
-  volverBtn.className = "volver-btn";
-  volverBtn.onclick = showopciones;
-  root.appendChild(volverBtn);
+  // Botón regresar
+  const btnVolver = document.createElement("button");
+  btnVolver.innerText = "← Regresar";
+  btnVolver.id = "btn-regresar";
+  btnVolver.onclick =  maestroGuia;
+  root.appendChild(btnVolver);
 
-  // Crear modal principal
-  const modal = document.createElement("div");
-  modal.className = "modal";
-  modal.id = "modalUniforme";
+  // Título
+  const titulo = document.createElement("h2");
+  titulo.innerText = "Uniformes Colegio General:";
+  root.appendChild(titulo);
 
-  // Contenido modal
-  const modalContent = document.createElement("div");
-  modalContent.className = "modal-content";
+  // Tabla de imágenes
+  const tabla = document.createElement("table");
+  const fila = document.createElement("tr");
 
-  // Botón cerrar modal (X)
-  const cerrarModalBtn = document.createElement("span");
-  cerrarModalBtn.className = "close";
-  cerrarModalBtn.id = "cerrarModalBtn";
-  cerrarModalBtn.innerHTML = "&times;";
-  modalContent.appendChild(cerrarModalBtn);
-
-  // Título modal
-  const titulo = document.createElement("h3");
-  titulo.textContent = "Tipo de uniforme";
-  modalContent.appendChild(titulo);
-
-  // Imagen uniforme
-  const divImg = document.createElement("div");
-  divImg.className = "uniform-img";
-  const img = document.createElement("img");
-  img.src = "./assets/Sin título-2 1.svg";
-  img.alt = "Uniforme completo";
-  divImg.appendChild(img);
-  modalContent.appendChild(divImg);
-
-  // Grupo botones Registrar y Enviar correo
-  const buttonGroup = document.createElement("div");
-  buttonGroup.className = "button-group";
-
-  const btnRegistrar = document.createElement("button");
-  btnRegistrar.id = "registrarBtn";
-  btnRegistrar.className = "boton";
-  btnRegistrar.textContent = "Registrar";
-
-  const btnMostrar = document.createElement("button");
-  btnMostrar.id = "mostrarBtn";
-  btnMostrar.className = "boton";
-  btnMostrar.textContent = "Enviar correo";
-
-  buttonGroup.append(btnRegistrar, btnMostrar);
-  modalContent.appendChild(buttonGroup);
-
-  // Opciones correo (oculto inicialmente)
-  const opcionesCorreo = document.createElement("div");
-  opcionesCorreo.id = "opcionesCorreo";
-  opcionesCorreo.className = "opciones-correo";
-  opcionesCorreo.style.display = "none";
-
-  const pOpciones = document.createElement("p");
-  pOpciones.textContent = "Selecciona la prenda faltante:";
-  opcionesCorreo.appendChild(pOpciones);
-
-  const ulOpciones = document.createElement("ul");
-  const prendas = [
-    "Chumpa", "Polo", "Pantalón", "Zapatos", "Chumpa de física", 
-    "Playera/Blusa", "Pants", "Tenis"
+  const imagenes = [
+    { src: "./assets/nomanches1.svg", nombre: "Uniforme de Física" },
+    { src: "./assets/Sintítulo-21.svg", nombre: "Uniforme de Diario" },
   ];
-  prendas.forEach(prenda => {
-    const li = document.createElement("li");
-    li.textContent = prenda;
-    li.style.cursor = "pointer";
-    ulOpciones.appendChild(li);
 
-    li.onclick = () => {
-      esperarEmailJSYEnviar(prenda);
-    };
+  imagenes.forEach((imgData) => {
+    const celda = document.createElement("td");
+
+    const img = document.createElement("img");
+    img.src = imgData.src;
+    img.className = "img-a";
+    img.alt = imgData.nombre;
+
+    const etiqueta = document.createElement("p");
+    etiqueta.innerText = imgData.nombre;
+
+    celda.appendChild(img);
+    celda.appendChild(etiqueta);
+    fila.appendChild(celda);
   });
-  opcionesCorreo.appendChild(ulOpciones);
 
-  modalContent.appendChild(opcionesCorreo);
-  modal.appendChild(modalContent);
-  document.body.appendChild(modal);
+  tabla.appendChild(fila);
+  root.appendChild(tabla);
 
-  // Eventos
-  cerrarModalBtn.onclick = () => {
-    document.body.removeChild(modal);
-  };
+  // Subtítulo
+  const subtitulo = document.createElement("h3");
+  subtitulo.innerText = "Selecciona los componentes faltantes:";
+  root.appendChild(subtitulo);
 
-  btnRegistrar.onclick = () => {
-    alert("Uniforme registrado correctamente.");
-  };
+  const componentes = [
+    "Camisa",
+    "Pantalón",
+    "Zapatos",
+    "Chumpa",
+    "Playera de Educación Física",
+    "Pants de Educación Física",
+    "Calcetas/Calcetines",
+    "Tenis",
+    "Corte de cabello",
+  ];
 
-  btnMostrar.onclick = () => {
-    opcionesCorreo.style.display = "block";
-  };
+  const contenedorChecks = document.createElement("div");
+  contenedorChecks.id = "componentes-lista";
 
-  // Funciones para envío con EmailJS
-  function esperarEmailJSYEnviar(prenda) {
-    if (window.emailjsReady && window.emailjs) {
-      enviarCorreo(prenda);
-    } else {
-      console.log("⏳ EmailJS no listo, intentando en 500ms...");
-      setTimeout(() => esperarEmailJSYEnviar(prenda), 500);
+  const checkboxes = [];
+
+  componentes.forEach((nombre) => {
+    const label = document.createElement("label");
+    const checkbox = document.createElement("input");
+    checkbox.type = "checkbox";
+    checkbox.value = nombre;
+    checkboxes.push(checkbox);
+
+    label.appendChild(checkbox);
+    label.appendChild(document.createTextNode(nombre));
+    contenedorChecks.appendChild(label);
+  });
+
+  root.appendChild(contenedorChecks);
+
+  // Botón enviar correo
+  const boton = document.createElement("button");
+  boton.innerText = "Enviar correo";
+  boton.id = "btn-enviar";
+
+  boton.onclick = () => {
+    const seleccionados = checkboxes
+      .filter(cb => cb.checked)
+      .map(cb => cb.value);
+
+    if (seleccionados.length === 0) {
+      alert("Por favor selecciona al menos un componente faltante.");
+      return;
     }
-  }
 
-  function enviarCorreo(prenda) {
-    console.log("➡️ Enviando correo con EmailJS...");
+    const asunto = encodeURIComponent("Uniforme escolar Colegio General");
+    const cuerpo = encodeURIComponent(
+      `Colegio General, le informa que el alumno ha faltado con los siguientes componentes del uniforme:\n\n${seleccionados.join("\n")}\n\nGracias, bendiciones.`
+    );
+    const destinatario = "aamelendez@scl.edu.gt";
 
-    const templateParams = {
-      nombre: "Estudiante",
-      tiempo: new Date().toLocaleString(),
-      mensaje: `Buenas, hace falta: ${prenda}`,
-    };
+    window.location.href = `https://mail.google.com/mail/?view=cm&fs=1&to=${destinatario}&su=${asunto}&body=${cuerpo}`;
+  };
 
-    emailjs.send("servicio_qx3yxbt", "plantilla_zm365pk", templateParams)
-      .then(() => alert("✅ Correo enviado correctamente."))
-      .catch(err => alert("❌ Error al enviar correo: " + JSON.stringify(err)));
-  }
+  root.appendChild(boton);
+
+  // Reemplazar contenido del body
+  document.body.innerHTML = "";
+  document.body.appendChild(root);
 }
 
 export { showUniforme };

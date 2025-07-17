@@ -4,6 +4,7 @@
     border: 1px solid black;
     position: relative;
     top: -53rem;
+    left: -5rem;
     background-color: white;
 
     display: grid;
@@ -58,7 +59,7 @@
     left: 1.5rem;
     top: -1em;
 }
-#btnCerrarS{
+#btnOtrosNiveles{
     width: 200px;
     height: 35px;
     border-radius: 15px;
@@ -69,4 +70,69 @@
     position: relative;
     left: 1.5rem;
     top: -1em;
+}
+#btnCerrarS{
+    width: 200px;
+    height: 35px;
+    border-radius: 15px;
+    border: 1px solid rgb(5, 5, 69);
+    background-color: rgb(5, 5, 69);
+    color: white;
+    grid-row: 7;
+    position: relative;
+    left: 1.5rem;
+    top: -1em;
+}
+
+
+  .contenedor-panel, .contenedor-maestros {
+    max-width: 600px;
+    margin: auto;
+    text-align: center;
+  }
+  
+  .btn-nivel, .btn-mostrar-maestros, .btn-volver-niveles, .btn-ver-alumnos {
+    padding: 10px 15px;
+    margin: 5px;
+    font-size: 16px;
+    background-color: #4caf50;
+    color: white;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    position: relative;
+    top: -25rem;
+  }
+  
+  .btn-nivel:hover, .btn-mostrar-maestros:hover, .btn-volver-niveles:hover, .btn-ver-alumnos:hover {
+    background-color: #45a049;
+  }
+  
+  .lista-maestros {
+    margin-top: 15px;
+    text-align: left;
+  }
+  
+  .maestro-card {
+    margin-bottom: 10px;
+    padding: 10px;
+    border: 1px solid #ddd;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+.contenedor-panel{
+    display: grid;
+    grid-template-columns: repeat();
+    grid-template-rows: repeat(15,1fr);
+    position: relative;
+    top: -52rem;
+
+
+    display: flex;
+  flex-direction: column;
+}
+.btn-nivel{
+    position: relative;
+    top: 20rem;
 }

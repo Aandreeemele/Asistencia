@@ -94,9 +94,11 @@ function showRecuperarContra() {
     const nueva = nuevaContra.value.trim();
     const repetir = verificarContra.value.trim();
     const user = inputCorreo.value.trim();
+    const codigoIngresado = inputCodigo.value.trim();
 
     if (nueva !== repetir) return alert("Las contraseñas no coinciden.");
     if (nueva.length < 4) return alert("La contraseña debe tener al menos 4 caracteres.");
+    if (!codigoIngresado) return alert("Ingresa el código enviado a tu correo.");
 
     const quiereCambiar = confirm("¿Te gustaría cambiar tu nombre o apellido?");
     let nuevoNombre = null;
@@ -111,7 +113,8 @@ function showRecuperarContra() {
       correo: user,
       nuevaContrasena: nueva,
       nuevoNombre: nuevoNombre || null,
-      nuevoApellido: nuevoApellido || null
+      nuevoApellido: nuevoApellido || null,
+      codigoIngresado // IMPORTANTE: enviamos el código ingresado para validación en backend
     };
 
     try {
@@ -125,7 +128,8 @@ function showRecuperarContra() {
         alert("✅ Información actualizada correctamente.");
         showLogin();
       } else {
-        alert("❌ No se pudo cambiar los datos.");
+        const errorData = await res.json();
+        alert("❌ Error: " + (errorData.error || "No se pudo cambiar los datos."));
       }
     } catch (err) {
       alert("❌ Error de red.");
