@@ -89,13 +89,24 @@
     border: 1px solid rgb(5, 5, 69);
     background-color: rgb(5, 5, 69);
     color: white;
-    grid-row: 8;
+    grid-row: 9;
     position: relative;
     left: 1.5rem;
     top: -1em;
 }
 
-
+#btnResumen{
+  width: 200px;
+    height: 35px;
+    border-radius: 15px;
+    border: 1px solid rgb(5, 5, 69);
+    background-color: rgb(5, 5, 69);
+    color: white;
+    grid-row: 8;
+    position: relative;
+    left: 1.5rem;
+    top: -1em;
+}
   .contenedor-panel, .contenedor-maestros {
     max-width: 600px;
     margin: auto;

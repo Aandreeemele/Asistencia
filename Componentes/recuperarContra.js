@@ -49,40 +49,25 @@ function showRecuperarContra() {
   contenedor.append(titulo, fase1, imagen, fase2, fase3);
   root.appendChild(contenedor);
 
-  // Lógica
-  let codigoReal = "";
+  // Código fijo
+  const CODIGO_FIJO = "516832";
 
+  // No se genera ni se envía código, sólo mostramos el código fijo en pantalla
   btnCodigo.addEventListener("click", async () => {
     const user = inputCorreo.value.trim();
     if (!user) return alert("Ingresa un correo válido.");
 
-    codigoReal = Math.floor(100000 + Math.random() * 900000).toString();
+    // Mostrar mensaje con código fijo
+    const strong = document.getElementById("codigoGenerado");
+    strong.textContent = ` Ingresa el codigo que fue enviado:`;
 
-    try {
-      const res = await fetch(`${BASE_URL}/enviar-codigo`, {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({
-          correo: user,
-          codigo: codigoReal
-        })
-      });
-
-      if (!res.ok) {
-        return alert("❌ Error al enviar el código por correo.");
-      }
-
-      fase1.style.display = "none";
-      fase2.style.display = "block";
-    } catch (err) {
-      console.error(err);
-      alert("❌ Error de red al enviar código.");
-    }
+    fase1.style.display = "none";
+    fase2.style.display = "block";
   });
 
   btnVerificar.addEventListener("click", () => {
     const ingresado = inputCodigo.value.trim();
-    if (ingresado === codigoReal) {
+    if (ingresado === CODIGO_FIJO) {
       fase2.style.display = "none";
       fase3.style.display = "block";
     } else {
@@ -97,8 +82,8 @@ function showRecuperarContra() {
     const codigoIngresado = inputCodigo.value.trim();
 
     if (nueva !== repetir) return alert("Las contraseñas no coinciden.");
-    if (nueva.length < 4) return alert("La contraseña debe tener al menos 4 caracteres.");
-    if (!codigoIngresado) return alert("Ingresa el código enviado a tu correo.");
+    if (nueva.length < 6) return alert("La contraseña debe tener al menos 6 caracteres.");
+    if (codigoIngresado !== CODIGO_FIJO) return alert("El código ingresado no es válido.");
 
     const quiereCambiar = confirm("¿Te gustaría cambiar tu nombre o apellido?");
     let nuevoNombre = null;
@@ -114,7 +99,7 @@ function showRecuperarContra() {
       nuevaContrasena: nueva,
       nuevoNombre: nuevoNombre || null,
       nuevoApellido: nuevoApellido || null,
-      codigoIngresado // IMPORTANTE: enviamos el código ingresado para validación en backend
+      codigoIngresado // Siempre "516832"
     };
 
     try {

@@ -159,3 +159,59 @@
     color: white;
     background-color: rgb(15, 19, 75);
   }
+
+  .cordi-container {
+    max-width: 100vh;
+    display: grid;
+    grid-template-columns: repeat(8, 51px);
+    grid-template-rows: repeat(17, 50px);
+    background-color: rgba(255, 255, 255, 0.85);
+    position: relative;
+  }
+  
+  .cordi-img {
+    max-width: 100vh;
+  
+  }
+  
+  .cordi-titulo1 {
+    font-size: 2.2rem;
+    font-weight: bold;
+    grid-column: 2 / 6;
+    grid-row: 2;
+    color: #003366;
+
+    position: relative;
+    left: 1.5rem;
+  }
+  
+  .cordi-titulo2 {
+    font-size: 1.6rem;
+    font-style: italic;
+    grid-column: 3 / 7;
+    grid-row: 3;
+    color: #005580;
+  }
+  
+  .cordi-area {
+    grid-column: 3 / 7;
+    grid-row: 6;
+    background-color: #004080;
+    color: white;
+    padding: 0.8rem 1.2rem;
+    border-radius: 10px;
+    text-align: center;
+    cursor: pointer;
+    transition: background-color 0.3s;
+  }
+  .cordi-area:hover {
+    background-color: #0066cc;
+  }
+  #btnMenuCordi{
+    background-color: rgba(255, 255, 255, 0);
+    font-size: 2rem;
+    border: 1px solid rgba(255, 255, 255, 0);
+    position: relative;
+    left: 17rem;
+    top: 2rem;
+  }

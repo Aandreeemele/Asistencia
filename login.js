@@ -3,6 +3,7 @@ import { showPanel } from "./Componentes/loginPrimero.js";
 import { maestroGuia } from "./Componentes/maestroGuia.js";
 import { crearFormularioRegistroX } from "./Componentes/registro.js";
 import { crearMantenimiento } from "./Componentes/mantenimiento.js";
+import { cordiPanel } from "./Componentes/cordi.js";
 import { BASE_URL } from "./config.js";
 
 document.addEventListener("DOMContentLoaded", () => {
@@ -161,7 +162,7 @@ function mostrarPanel() {
 
   switch (rol) {
     case "coordinador":
-      showPanel();
+      cordiPanel();
       break;
     case "maestro":
       console.log("Correo:", user.correo, "Grado asignado:", user.gradoAsignado);

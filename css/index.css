@@ -154,3 +154,113 @@ body {
 #panelAcademico .bachillerato-btn {
   margin: 4px 0;
 }
+
+
+
+/* Contenedor general */
+.reporte-contenedor {
+  max-width: 700px;
+  margin: 30px auto;
+  padding: 30px 40px;
+  background: #fff;
+  border-radius: 15px;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.1);
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+/* Título */
+.reporte-titulo {
+  text-align: center;
+  font-size: 28px;
+  font-weight: 700;
+  margin-bottom: 25px;
+  color: #2c3e50;
+  letter-spacing: 1.2px;
+
+  position: relative;
+  left: -0.5rem;
+}
+
+/* Tabla completa */
+.reporte-tabla {
+  width: 100%;
+  border-collapse: separate;
+  border-spacing: 0 12px;
+}
+
+/* Encabezados */
+.reporte-tabla th {
+  background-color: #2980b9;
+  color: white;
+  padding: 14px 20px;
+  font-weight: 600;
+  font-size: 16px;
+  text-transform: uppercase;
+  border-top-left-radius: 12px;
+  border-top-right-radius: 12px;
+}
+
+/* Filas */
+.reporte-tabla tbody tr {
+  background-color: #ecf0f1;
+  transition: background-color 0.3s ease;
+  cursor: default;
+}
+
+/* Hover para filas */
+.reporte-tabla tbody tr:hover {
+  background-color: #d6eaf8;
+}
+
+/* Celdas */
+.reporte-tabla td {
+  padding: 14px 20px;
+  font-size: 15px;
+  color: #34495e;
+  text-align: center;
+  border-bottom: 1px solid transparent;
+}
+
+/* Estado con colores */
+.reporte-tabla td:nth-child(4) {
+  font-weight: 600;
+  border-radius: 12px;
+  color: white;
+  padding: 8px 15px;
+  width: 110px;
+}
+
+/* Estado: Enviado - Verde */
+.reporte-tabla td:nth-child(4):contains('Enviado') {
+  background-color: #27ae60;
+}
+
+/* Estado: Pendiente - Naranja */
+.reporte-tabla td:nth-child(4):contains('Pendiente') {
+  background-color: #e67e22;
+}
+
+/* Estado: Rechazado - Rojo */
+.reporte-tabla td:nth-child(4):contains('Rechazado') {
+  background-color: #c0392b;
+}
+
+/* Botón en panel */
+.btn-reportes {
+  display: block;
+  margin: 20px auto 0 auto;
+  padding: 12px 25px;
+  font-size: 16px;
+  background-color: #2980b9;
+  color: white;
+  border: none;
+  border-radius: 25px;
+  cursor: pointer;
+  box-shadow: 0 4px 12px rgba(41, 128, 185, 0.4);
+  transition: background-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+.btn-reportes:hover {
+  background-color: #1c5980;
+  box-shadow: 0 6px 18px rgba(28, 89, 128, 0.6);
+}

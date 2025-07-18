@@ -1,13 +1,13 @@
 .Titulo01{
     font-size: 3rem;
     position: relative;
-    top: -46rem;
+    top: -48rem;
     left: 6rem;
 }
 .Titulo02{
     font-size: 2rem;
     position: relative;
-    top: -50rem;
+    top: -52rem;
     left: 6.4rem;
 }
 
@@ -100,8 +100,7 @@
 }
 
 .imgpanel{
-    height: 100vh;
-    overflow: hidden;
+    max-width: 100vh;
 }
 .Titulx0022{
     position: relative;
@@ -112,4 +111,17 @@
 .boton-nivel{
     position: relative;
     top: -5rem;
+}
+
+
+.boton-nivel{
+    position: relative;
+    top: -50rem;
+    width: 250px;
+    left: 4rem;
+
+    height: 30px;
+    background-color: rgba(255, 255, 255, 0.205);
+    color: rgba(255, 255, 255, 0);
+    border: 1px solid rgba(255, 255, 255, 0);
 }

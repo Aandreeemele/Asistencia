@@ -2,6 +2,10 @@ import { showLogin } from "../login.js";
 import { showUniforme } from "./uniforme.js";
 import { mostrarPanelAcademico } from "./otrosNiveles.js";
 import { mostrarGraficas } from "./graficas.js";
+import { mostrarReportesEnviados } from "./resumen.js";
+
+// 🔹 Si tienes una función para resumen, impórtala aquí:
+// import { mostrarResumen } from "./resumen.js";
 
 function crearMenu() {
   const contenedor = document.createElement("div");
@@ -25,6 +29,7 @@ function crearMenu() {
   const btnOtrosNiveles = crearBoton("btnOtrosNiveles", "Otros Niveles");
   const btnCorreo = crearBoton("btnCorreo", "Enviar Correo");
   const btnCerrarS = crearBoton("btnCerrarS", "Cerrar Sesión");
+  const btnResumen = crearBoton("btnResumen", "Resumen"); // 🔸 Nuevo botón
 
   function cerrarMenu() {
     const menu = document.getElementById("menuDesplegable");
@@ -43,11 +48,16 @@ function crearMenu() {
     document.addEventListener("click", clickFueraDelMenu);
   }, 0);
 
+  // Eventos
   btnCerrarS.addEventListener("click", () => {
     cerrarMenu();
     showLogin();
   });
 
+  btnResumen.addEventListener("click", () =>{
+    mostrarReportesEnviados();
+  } );
+  
   btnProye.addEventListener("click", () => {
     cerrarMenu();
     mostrarGraficas();
@@ -79,7 +89,6 @@ function crearMenu() {
 
   btnReporte.addEventListener("click", () => {
     cerrarMenu();
-
     const destinatario = "aamelendez@scl.edu.gt";
     const asunto = encodeURIComponent("Reporte Colegio General");
     const cuerpo = encodeURIComponent("Colegio General le informa sobre el reporte, generado desde la plataforma del colegio.");
@@ -91,9 +100,27 @@ function crearMenu() {
     }, 4000);
   });
 
-  menuContent.append(titulo1, titulo2, btnReporte, btnUniforme, btnProye, btnCorreo, btnOtrosNiveles, btnCerrarS);
-  contenedor.appendChild(menuContent);
+  // 🔸 Evento para botón RESUMEN
+  btnResumen.addEventListener("click", () => {
+    cerrarMenu();
+    // Aquí puedes llamar a tu función real: mostrarResumen();
+    alert("Mostrando resumen...");
+  });
 
+  // Agrega todos los elementos al menú
+  menuContent.append(
+    titulo1,
+    titulo2,
+    btnReporte,
+    btnUniforme,
+    btnProye,
+    btnCorreo,
+    btnOtrosNiveles,
+    btnResumen,     // 🔸 Se incluye en el orden
+    btnCerrarS
+  );
+
+  contenedor.appendChild(menuContent);
   return contenedor;
 }
 
