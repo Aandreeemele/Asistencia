@@ -70,6 +70,18 @@
     left: 1.5rem;
     top: -1em;
 }
+#btnCorreo{
+  width: 200px;
+  height: 35px;
+  border-radius: 15px;
+  border: 1px solid rgb(5, 5, 69);
+  background-color: rgb(5, 5, 69);
+  color: white;
+  grid-row: 7;
+  position: relative;
+  left: 1.5rem;
+  top: -1em;
+}
 #btnCerrarS{
     width: 200px;
     height: 35px;
@@ -77,7 +89,7 @@
     border: 1px solid rgb(5, 5, 69);
     background-color: rgb(5, 5, 69);
     color: white;
-    grid-row: 7;
+    grid-row: 8;
     position: relative;
     left: 1.5rem;
     top: -1em;

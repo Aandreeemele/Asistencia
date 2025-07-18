@@ -1,6 +1,7 @@
 import { showLogin } from "../login.js";
 import { showUniforme } from "./uniforme.js";
 import { mostrarPanelAcademico } from "./otrosNiveles.js";
+import { mostrarGraficas } from "./graficas.js";
 
 function crearMenu() {
   const contenedor = document.createElement("div");
@@ -22,16 +23,15 @@ function crearMenu() {
   const btnUniforme = crearBoton("btnUniforme", "Uniforme");
   const btnProye = crearBoton("btnProye", "Proyecciones");
   const btnOtrosNiveles = crearBoton("btnOtrosNiveles", "Otros Niveles");
+  const btnCorreo = crearBoton("btnCorreo", "Enviar Correo");
   const btnCerrarS = crearBoton("btnCerrarS", "Cerrar Sesión");
 
   function cerrarMenu() {
     const menu = document.getElementById("menuDesplegable");
     if (menu) menu.remove();
-    // Quitar también el listener global cuando cerramos menú
     document.removeEventListener("click", clickFueraDelMenu);
   }
 
-  // Detecta clic fuera del menú para cerrarlo
   function clickFueraDelMenu(event) {
     const menu = document.getElementById("menuDesplegable");
     if (menu && !menu.contains(event.target)) {
@@ -39,16 +39,32 @@ function crearMenu() {
     }
   }
 
-  // Agregar listener global para detectar clic fuera
   setTimeout(() => {
-    // Se usa setTimeout para que el click que abrió el menú no cierre inmediatamente
     document.addEventListener("click", clickFueraDelMenu);
   }, 0);
 
-  // Eventos botones:
   btnCerrarS.addEventListener("click", () => {
     cerrarMenu();
     showLogin();
+  });
+
+  btnProye.addEventListener("click", () => {
+    cerrarMenu();
+    mostrarGraficas();
+  });
+
+  btnCorreo.addEventListener("click", () => {
+    cerrarMenu();
+    const destinatario = "aamelendez@scl.edu.gt";
+    const asunto = encodeURIComponent("𝙲𝚘𝚕𝚎𝚐𝚒𝚘 𝙶𝚎𝚗𝚎𝚛𝚊𝚕");
+    const cuerpo = encodeURIComponent(
+      `Estimado padre de familia,\n\nEnvió información del comportamiento de su hijo(a)\n\nGracias.`
+    );
+    window.open(`https://mail.google.com/mail/?view=cm&fs=1&to=${destinatario}&su=${asunto}&body=${cuerpo}`, "_blank");
+
+    setTimeout(() => {
+      alert("Redactando correo en Gmail...");
+    }, 1500);
   });
 
   btnUniforme.addEventListener("click", () => {
@@ -75,12 +91,7 @@ function crearMenu() {
     }, 4000);
   });
 
-  btnProye.addEventListener("click", () => {
-    cerrarMenu();
-    alert("Aquí va la función de proyecciones.");
-  });
-
-  menuContent.append(titulo1, titulo2, btnReporte, btnUniforme, btnProye, btnOtrosNiveles, btnCerrarS);
+  menuContent.append(titulo1, titulo2, btnReporte, btnUniforme, btnProye, btnCorreo, btnOtrosNiveles, btnCerrarS);
   contenedor.appendChild(menuContent);
 
   return contenedor;
@@ -94,4 +105,3 @@ function crearBoton(id, texto) {
 }
 
 export { crearMenu };
-

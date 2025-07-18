@@ -1,33 +1,36 @@
 #btn-regresar-asistencia {
-    background-color: rgb(5, 5, 56);
-    color: white;
-    padding: 5px 10px;
-    border-radius: 8px;
-    border: none;
-    cursor: pointer;
-    position: relative;
-    top: 2rem;
-  }
-  
-  #btn-regresar-asistencia:hover {
-    background-color: rgb(6, 6, 92);
-  }
-  
-  #btn-siguiente-asistencia {
-    background-color: rgb(5, 5, 56);
-    color: white;
-    padding: 5px 10px;
-    border-radius: 8px;
-    border: none;
-    cursor: pointer;
-    position: relative;
-    top: 2rem;
-    left: 13.5rem;
-  }
-  
-  #btn-siguiente-asistencia:hover {
-    background-color: rgb(6, 6, 92);
-  }
+  background-color: white;
+  color: black;
+  padding: 10px 20px;
+  font-size: 0.8rem;
+  border: none;
+  border-radius: 12px;
+  cursor: pointer;
+  margin: 10px 5px 20px 5px;
+  transition: background-color 0.3s ease;
+  position: relative;
+  left: 0rem;
+}
+#btn-regresar-asistencia:hover {
+  background-color: #ddd;
+}
+
+#btn-siguiente-asistencia {
+  background-color: white;
+  color: black;
+  padding: 10px 20px;
+  font-size: 0.8rem;
+  border: none;
+  border-radius: 12px;
+  cursor: pointer;
+  margin: 10px 5px 20px 5px;
+  transition: background-color 0.3s ease;
+  position: relative;
+  left: 8.5rem;
+}
+#btn-siguiente-asistencia:hover {
+  background-color: #ddd;
+}
   #tablaAsistenciasContainer{
     position: relative;
     top: rem;

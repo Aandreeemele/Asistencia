@@ -1,7 +1,5 @@
 import { showPanel } from "./loginPrimero.js";
 import { showopciones } from "./opciones.js";
-import { proyeccionxs, generarVistaGrado } from "./proyeciones1.js";
-
 // 🔧 Función reutilizable para mostrar las proyecciones
 function mostrarProyecciones() {
     const root = document.getElementById("root");

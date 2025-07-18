@@ -1,8 +1,9 @@
-import { showopciones } from "./opciones.js";
 import { BASE_URL } from "../config.js";
-import { maestroGuia } from "./maestroGuia.js";
 import { crearContenedorPrincipal } from "./contenedorPrincipal.js";
-async function registrarAlumnos(nivel) {
+import { showopciones } from "./opciones.js";
+import { mostrarPanelAcademico } from "./otrosNiveles.js";
+
+async function registrarAlumnos1(nivel) {
   const app = document.getElementById("app") || document.body;
   app.innerHTML = "";
 
@@ -10,12 +11,21 @@ async function registrarAlumnos(nivel) {
   const contenedor = crearContenedorPrincipal();
   app.appendChild(contenedor);
 
+  // Crear botones Volver y Siguiente
+  const btnVolver = document.createElement("button");
+  btnVolver.id = "btnVolver";
+  btnVolver.textContent = "← Volver";
+  contenedor.appendChild(btnVolver);
+
+  const btnSiguiente = document.createElement("button");
+  btnSiguiente.id = "btnSiguiente";
+  btnSiguiente.textContent = "Siguiente →";
+  contenedor.appendChild(btnSiguiente);
 
   // Espera mínima para que el HTML esté renderizado
   await new Promise((res) => setTimeout(res, 50));
 
   // Referencias a botones y contenedores internos
-  const btnSiguiente = document.getElementById("btnSiguiente");
   const btnMarcarTodos = document.getElementById("btnMarcarTodos");
   const btnMarcarTodosAusentes = document.getElementById("btnMarcarTodosAusentes");
   const btnEnviarCorreos = document.getElementById("btnEnviarCorreos");
@@ -29,7 +39,6 @@ async function registrarAlumnos(nivel) {
   let alumnos = await cargarAlumnosDesdeDB();
   let alumnoIdAEliminar = null;
 
-  // Función que dibuja cada tarjeta de alumno
   function crearElementoAlumno(alumno) {
     const card = document.createElement("div");
     card.className = "alumno-card";
@@ -43,14 +52,18 @@ async function registrarAlumnos(nivel) {
     btnAsistio.textContent = "✓";
     btnAsistio.title = "Marcar como asistió";
     btnAsistio.className = "btn-asistio";
-    btnAsistio.addEventListener("click", () => marcarAsistencia(alumno.id, "asistio", btnAsistio, btnNoAsistio, btnEliminar));
+    btnAsistio.addEventListener("click", () =>
+      marcarAsistencia(alumno.id, "asistio", btnAsistio, btnNoAsistio, btnEliminar)
+    );
     card.appendChild(btnAsistio);
 
     const btnNoAsistio = document.createElement("button");
     btnNoAsistio.textContent = "✗";
     btnNoAsistio.title = "Marcar como no asistió";
     btnNoAsistio.className = "btn-no-asistio";
-    btnNoAsistio.addEventListener("click", () => marcarAsistencia(alumno.id, "noasistio", btnNoAsistio, btnAsistio, btnEliminar));
+    btnNoAsistio.addEventListener("click", () =>
+      marcarAsistencia(alumno.id, "noasistio", btnNoAsistio, btnAsistio, btnEliminar)
+    );
     card.appendChild(btnNoAsistio);
 
     const btnEliminar = document.createElement("button");
@@ -66,22 +79,22 @@ async function registrarAlumnos(nivel) {
     contenedorAlumnos.appendChild(card);
   }
 
-  // Dibuja todas las tarjetas
   alumnos.forEach(crearElementoAlumno);
 
-  // Asignar listeners generales
-  if (btnSiguiente) btnSiguiente.addEventListener("click", showopciones);
+  // Listeners generales
+  if (btnVolver) btnVolver.addEventListener("click", mostrarPanelAcademico); // o puedes redirigir a donde quieras
+  if (btnSiguiente) btnSiguiente.addEventListener("click", mostrarPanelAcademico);
   if (btnMarcarTodos) btnMarcarTodos.addEventListener("click", () => marcarTodos("asistio"));
   if (btnMarcarTodosAusentes) btnMarcarTodosAusentes.addEventListener("click", () => marcarTodos("noasistio"));
   if (btnEnviarCorreos) btnEnviarCorreos.addEventListener("click", enviarCorreos);
   if (btnMarcarTarde) btnMarcarTarde.addEventListener("click", marcarLlegadaTarde);
-  if (btnCancelar) btnCancelar.addEventListener("click", () => modal.style.display = "none");
+  if (btnCancelar) btnCancelar.addEventListener("click", () => (modal.style.display = "none"));
   if (btnConfirmar) btnConfirmar.addEventListener("click", async () => {
     if (alumnoIdAEliminar !== null) {
       await eliminarAlumnoDB(alumnoIdAEliminar);
       modal.style.display = "none";
       alumnoIdAEliminar = null;
-      registrarAlumnos(nivel);
+      registrarAlumnos1(nivel);
     }
   });
   if (btnAgregar) btnAgregar.addEventListener("click", agregarAlumno);
@@ -90,8 +103,8 @@ async function registrarAlumnos(nivel) {
 
   function marcarAsistencia(id, estado, btnOn, btnOff1, btnOff2) {
     btnOn.style.backgroundColor = estado === "asistio" ? "green" : "red";
-    btnOff1.style.backgroundColor = "";
-    btnOff2.style.backgroundColor = "";
+    if (btnOff1) btnOff1.style.backgroundColor = "";
+    if (btnOff2) btnOff2.style.backgroundColor = "";
     guardarEstadoAsistencia(id, estado);
   }
 
@@ -133,7 +146,7 @@ async function registrarAlumnos(nivel) {
         body: JSON.stringify({ nombre, grado, correo, telefono }),
       });
       if (!res.ok) throw new Error();
-      registrarAlumnos(nivel);
+      registrarAlumnos1(nivel);
     } catch {
       alert("Error al agregar alumno.");
     }
@@ -147,7 +160,10 @@ async function guardarEstadoAsistencia(id, estado) {
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({ estado }),
     });
-    localStorage.setItem(`asistencia-${id}`, JSON.stringify({ estado, expira: Date.now() + 12*60*60*1000 }));
+    localStorage.setItem(
+      `asistencia-${id}`,
+      JSON.stringify({ estado, expira: Date.now() + 12 * 60 * 60 * 1000 })
+    );
   } catch {
     alert("No se pudo actualizar asistencia.");
   }
@@ -171,4 +187,4 @@ async function eliminarAlumnoDB(id) {
   }
 }
 
-export { registrarAlumnos };
+export { registrarAlumnos1 };

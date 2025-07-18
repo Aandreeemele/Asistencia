@@ -2,6 +2,8 @@ import { crearMenu } from "./menu.js";
 import { registrarAlumnos } from "./registraralumnos.js";
 
 function maestroGuia(correoDelMaestro, gradoAsignado) {
+  const app = document.getElementById("app") || document.body;
+  app.innerHTML = "";
   console.log("gradoAsignado recibido:", gradoAsignado);
   
   let root = document.getElementById("root");
@@ -58,7 +60,7 @@ function maestroGuia(correoDelMaestro, gradoAsignado) {
   // Validar que gradoAsignado sea cadena no vacía
   const textoGrado = gradoAsignado && gradoAsignado.trim() !== "" 
     ? gradoAsignado 
-    : "Sin grado asignado";
+    :"𝚅 𝚌𝚘𝚖𝚙𝚞𝚝𝚊𝚌𝚒ó𝚗";
 
   console.log("textoGrado:", textoGrado);
 

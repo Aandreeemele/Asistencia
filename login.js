@@ -2,6 +2,7 @@ import { showRecuperarContra } from "./Componentes/recuperarContra.js";
 import { showPanel } from "./Componentes/loginPrimero.js"; 
 import { maestroGuia } from "./Componentes/maestroGuia.js";
 import { crearFormularioRegistroX } from "./Componentes/registro.js";
+import { crearMantenimiento } from "./Componentes/mantenimiento.js";
 import { BASE_URL } from "./config.js";
 
 document.addEventListener("DOMContentLoaded", () => {
@@ -103,44 +104,53 @@ function showLogin() {
 
   form.addEventListener("submit", async (e) => {
     e.preventDefault();
-  
+
     const correo = inputCorreo.value.trim();
     const contrasena = inputContrasena.value;
-  
+
     try {
       const res = await fetch(`${BASE_URL}/login`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ correo, contrasena }),
       });
-  
+
       if (!res.ok) {
+        if (res.status >= 500) {
+          document.body.innerHTML = "";
+          crearMantenimiento();
+          return;
+        }
         throw new Error("Credenciales incorrectas");
       }
-  
+
       const usuario = await res.json();
       console.log("Usuario recibido:", usuario);
-  
-      // Preparar objeto con datos correctos
+
       const datosUsuario = {
         correo: usuario.correo,
         nombre: usuario.nombre,
         apellido: usuario.apellido,
         rol: usuario.rol,
-        gradoAsignado: usuario.gradoAsignado || "",  // <-- aquí
+        gradoAsignado: usuario.gradoAsignado || "",
         contraseña: contrasena
       };
-  
+
       alert("Inicio de sesión exitoso");
       localStorage.setItem("user", JSON.stringify(datosUsuario));
-  
+
       mostrarPanel();
-  
+
     } catch (error) {
-      alert("Credenciales incorrectas o usuario no existe");
+      if (error.message.includes("Failed to fetch") || error.message.includes("NetworkError")) {
+        document.body.innerHTML = "";
+        crearMantenimiento();
+      } else {
+        alert("Credenciales incorrectas o usuario no existe");
+      }
     }
   });
-  
+
 }
 
 function mostrarPanel() {
@@ -165,7 +175,6 @@ function mostrarPanel() {
       break;
   }
 }
-
 
 function manejarBotonesNavegacion() {
   const btnVolver = document.getElementById("btnVolver");

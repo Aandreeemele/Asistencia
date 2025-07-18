@@ -97,7 +97,6 @@ async function mostrarTablaAsistencias() {
     tablaContainer.appendChild(wrapper);
     root.appendChild(tablaContainer);
 
-    // Botones navegación
     const navBotones = document.createElement("div");
 
     const btnVolver = document.createElement("button");
@@ -112,7 +111,6 @@ async function mostrarTablaAsistencias() {
 
     root.appendChild(navBotones);
 
-    // Event listeners, solo si existen botones (creados aquí mismo)
     btnVolver.addEventListener("click", () => {
       console.log("← Botón Regresar presionado");
       showopciones();
